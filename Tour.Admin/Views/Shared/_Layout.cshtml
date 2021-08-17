@@ -1,0 +1,209 @@
+﻿@using  Tour.Common.Constants;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trang quản trị</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/dist/css/customize.css">
+    <link rel="stylesheet" href="~/dist/css/admin-forms.css">
+</head>
+<body class="sidebar-mini layout-fixed text-sm">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #3c8dbc;">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: #fff;"></i></a>
+                </li>
+            </ul>
+
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-3">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+                        <div class="user-panel d-flex">
+                            <div class="image">
+                                <img src="@Constants.Avatar" class="img-circle elevation-2" alt="User Image" style="width: 1.8rem;">
+                            </div>
+                            <div class="info">
+                                <span style="color: #fff;">@Constants.FullName</span>
+                                <i class="ace-icon fa fa-caret-down" style="color: #fff;"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="showChangepass">
+                            <i class="fas fa-users mr-2"></i> Đổi mật khẩu
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/SysUsrUser/Logout" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> Đăng xuất
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        @Html.Partial("_LeftMenu")
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-inline-block">
+                <strong>Copyright<a href="#">OU-IT</a>.</strong>
+            </div>
+        </footer>
+    </div>
+    <div class="modal fade dsoft-popup-modal" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="display:block">
+                    <h4 class="modal-title">Default Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 0px">
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="fullscreen-loader" style="display:none;">
+        <div class="loader-backdrop"></div>
+        <div class="progress-circular">
+            <div class="spinner-wrapper">
+                <div class="sw-inner">
+                    <div class="sw-gap">&nbsp;</div>
+                    <div class="sw-left">
+                        <div class="sw-half-circle">&nbsp;</div>
+                    </div>
+                    <div class="sw-right">
+                        <div class="sw-half-circle">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.js"></script>
+    <script src="~/dist/js/bootbox/bootbox.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script src="~/assets/js/common.js"></script>
+
+    <!-- CKeditor -->
+    <script src="~/plugins/ckeditor/ckeditor/ckeditor.js"></script>
+    <script src="~/plugins/ckeditor/ckeditor/styles.js"></script>
+    <script src="~/plugins/ckeditor/ckeditor/adapters/jquery.js"></script>
+
+</body>
+</html>
+@RenderSection("Scripts", required: false)
+<script>
+    $(document).ready(function () {
+        $("#showChangepass").click(function () {
+            $("#changePassword").modal();
+        });
+    });
+</script>
+<div class="modal fade" id="changePassword" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title panel-title" style="font-size: 18px;float:left"> Đổi mật khẩu</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span> Mật khẩu cũ<span style="color:red">*</span></label>
+                    <input type="password" class="form-control" id="OldPassword" placeholder="Mật khẩu cũ">
+
+                </div>
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span> Mật khẩu mới<span style="color:red">*</span></label>
+                    <input type="password" class="form-control" id="Password" placeholder=" Mật khẩu mới">
+                </div>
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span> Xác nhận mật khẩu mới<span style="color:red">*</span> </label>
+                    <input type="password" class="form-control" id="ConfimPassword" placeholder="Xác nhận mật khẩu mới">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnchangepassword" class="btn btn-success btn-sm float-sm-right btnchangepassword"><span class="fa fa-save"></span>Lưu</button>
+                <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>

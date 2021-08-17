@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using Tour.Admin;
+@using Tour.Base;
+@if (!string.IsNullOrEmpty(Context.Session.GetString(DefinedConstants.SessionUser)))
+{
+    var jsonUser = Context.Session.GetString(DefinedConstants.SessionUser);
+    var infoMemer = JsonConvert.DeserializeObject<UserLoginModel>(jsonUser);
+    var listMenu = infoMemer.ListMenuOfUser;
+    string action = Context.Request.RouteValues["action"].ToString();
+    string controller = Context.Request.RouteValues["controller"].ToString();
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link" style="background-color: #3c8dbc;">
+            <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">Quản trị hệ thống</span>
+        </a>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    @if (listMenu != null)
+                    {
+                        var listParent = listMenu.Where(m => string.IsNullOrWhiteSpace(m.parentMenuCde)).OrderBy(M => M.orderBy).ToList();
+                        @foreach (var item in listParent)
+                        {
+                            var urlAction = string.Format("/{0}/{1}", item.controller, item.actionOrClass);
+                            var listChild = listMenu.Where(m => m.parentMenuCde == item.menuCode).ToList();
+                            var parentMenuCde = listChild.Where(m => (m.controller == controller && m.actionOrClass == action)).Select(m => m.parentMenuCde).FirstOrDefault();
+                            var menuOpen = parentMenuCde == item.menuCode ? "menu-open" : "";
+                            <li class="nav-item has-treeview @menuOpen">
+                                <a href="#" class="nav-link">
+                                    <i class="@item.menuIcon"></i>
+                                    <p>
+                                        item.menuTitleCde
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach (var itemChild in listChild)
+                                    {
+                                        var urlActionChild = string.Format("/{0}/{1}", itemChild.controller, itemChild.actionOrClass);
+                                        var isActice = itemChild.controller == controller && itemChild.actionOrClass == action ? "active" : "";
+                                        <li class="nav-item">
+                                            <a href="@urlActionChild" class="nav-link @isActice">
+                                                <i class="@itemChild.menuIcon"></i>
+                                                <p>itemChild.menuTitleCde</p>
+                                            </a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+}
