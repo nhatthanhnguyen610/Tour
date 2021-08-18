@@ -31,11 +31,11 @@ namespace Tour.Admin.Controllers
                 context.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "SysUsrUser", action = "Login" }));
                 base.OnActionExecuting(context);
             }
-            //if (!string.IsNullOrWhiteSpace(context.HttpContext.Session.GetString(DefinedConstants.SessionUser)))
-            //{
-            //    var jsonUser = context.HttpContext.Session.GetString(DefinedConstants.SessionUser);
-            //    var infoMemer = JsonConvert.DeserializeObject<UserLoginModel>(jsonUser);
-            //}
+            if (!string.IsNullOrWhiteSpace(context.HttpContext.Session.GetString(DefinedConstants.SessionUser)))
+            {
+                var jsonUser = context.HttpContext.Session.GetString(DefinedConstants.SessionUser);
+                var infoMemer = JsonConvert.DeserializeObject<UserLoginModel>(jsonUser);
+            }
             base.OnActionExecuting(context);
         }
     }
