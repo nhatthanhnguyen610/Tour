@@ -16,5 +16,6 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         UserLoginModel LoginSys(LoginRequestModel model);
+        Boolean ChangePassSys(RequestChangePassModel model);
     }
 }

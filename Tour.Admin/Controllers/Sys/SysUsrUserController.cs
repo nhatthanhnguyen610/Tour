@@ -65,13 +65,49 @@ namespace Tour.Admin.Controllers
                 {
                     Constants.UserCde = infoMemer.userCode;
                     Constants.FullName = infoMemer.fullName;
+                    Constants.Password = infoMemer.password;
                     Constants.Avatar = infoMemer.avatar == null ? Constants.No_Image : infoMemer.avatar;
                     string strData = infoMemer.ToJSON();
                     HttpContext.Session.SetString(DefinedConstants.SessionUser, strData);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new ChangePassViewModel());
                 }
                 viewModel.errorMessage = "Đăng nhập không thành công";
                 return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePassViewModel model)
+        {
+            try
+            {
+                if (model.passwordNew != model.passwordConfirm || model.passwordOld != Constants.Password)
+                {
+                    return View(new ChangePassViewModel()
+                    {
+                        errorMessage = "Mat khau khong dung"
+                    }) ;
+                }
+                var infoMemer = _sysUsrUserService.ChangePassSys(
+                    new RequestChangePassModel()
+                    {
+                        userCde = Constants.UserCde,
+                        passWordOld = model.passwordOld,
+                        passWordNew = model.passwordNew,
+                        passWordConfirm = model.passwordConfirm
+                    });
+                if (infoMemer == true)
+                {
+                    Constants.Password = model.passwordNew;
+                    return RedirectToAction("Index", "Home");
+                }
+                model.errorMessage = "Mat khau sai";
+                return View(model);
             }
             catch (Exception ex)
             {

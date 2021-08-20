@@ -15,6 +15,12 @@ namespace Tour.Service
         {
             _sysUsrUserProvider = new SysUsrUserProvider(appId, userId);
         }
+
+        public Boolean ChangePassSys(RequestChangePassModel model)
+        {
+            return _sysUsrUserProvider.ChangePassSys(model);
+        }
+
         /// <summary>
         /// CreateBy: thanhnn
         /// Description: Đăng nhập người dùng

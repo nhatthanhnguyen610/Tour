@@ -16,6 +16,24 @@ namespace Tour.Provider
         {
 
         }
+
+        public Boolean ChangePassSys(RequestChangePassModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.passWordOld,
+                model.userCde,
+                model.passWordNew,
+                model.passWordConfirm
+            };
+            var result = base.ExecProcedure<Boolean>("sp_SysUsrUser_ChangePassword_V01", paramObj);
+            if (result.Any()) 
+            {
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// CreateBy: thanhnn
         /// Description: Đăng nhập người dùng

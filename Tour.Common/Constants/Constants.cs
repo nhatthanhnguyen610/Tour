@@ -23,6 +23,7 @@ namespace Tour.Common.Constants
         public static string UserCde{ get; set; }      
         public static string FullName { get; set; }
         public static string Avatar { get; set; }
+        public static string Password { get; set; }
 		public const string MasterCde="MQL00001";
         public static List<SysMenuOfUser> ListMenuOfUser { get; set; }
         public const string KHACHLE = "KHACHLE";
