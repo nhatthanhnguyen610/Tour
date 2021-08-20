@@ -17,7 +17,13 @@ namespace Tour.Provider
 
         }
 
-        public Boolean ChangePassSys(RequestChangePassModel model)
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Doi mat khau nguoi dung
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool ChangePassSysUser(RequestChangePassModel model)
         {
             var paramObj = new object[]
             {

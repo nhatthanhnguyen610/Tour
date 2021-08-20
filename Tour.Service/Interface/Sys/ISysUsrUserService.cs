@@ -16,6 +16,13 @@ namespace Tour.Service
         /// <param name="model"></param>
         /// <returns></returns>
         UserLoginModel LoginSys(LoginRequestModel model);
-        Boolean ChangePassSys(RequestChangePassModel model);
+
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Doi mat khau nguoi dung
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool ChangePassSysUser(RequestChangePassModel model);
     }
 }

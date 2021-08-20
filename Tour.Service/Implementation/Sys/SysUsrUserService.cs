@@ -16,7 +16,13 @@ namespace Tour.Service
             _sysUsrUserProvider = new SysUsrUserProvider(appId, userId);
         }
 
-        public Boolean ChangePassSys(RequestChangePassModel model)
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Doi mat khau nguoi dung
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool ChangePassSysUser(RequestChangePassModel model)
         {
             return _sysUsrUserProvider.ChangePassSys(model);
         }

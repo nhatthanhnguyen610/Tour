@@ -80,9 +80,15 @@ namespace Tour.Admin.Controllers
             }
         }
 
+        /// <summary>
+        ///  Author: dtr
+        ///  Description: doi mat khau
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult ChangePassword(ChangePassViewModel model)
+        public ActionResult ChangePasswordSysUser(ChangePassViewModel model)
         {
             try
             {
@@ -93,7 +99,7 @@ namespace Tour.Admin.Controllers
                         errorMessage = "Mat khau khong dung"
                     }) ;
                 }
-                var infoMemer = _sysUsrUserService.ChangePassSys(
+                var infoMemer = _sysUsrUserService.ChangePassSysUser(
                     new RequestChangePassModel()
                     {
                         userCde = Constants.UserCde,
