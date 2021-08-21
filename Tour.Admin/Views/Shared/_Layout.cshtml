@@ -1,5 +1,4 @@
 ﻿@using  Tour.Common.Constants;
-@model Tour.Admin.Models.ChangePassViewModel;
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +85,7 @@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        @Html.Partial("_LeftMenu")
+        @await Html.PartialAsync("_LeftMenu")
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @RenderBody()
@@ -183,31 +182,28 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title panel-title" style="font-size: 18px;float:left"> Đổi mật khẩu</h4>
+                <h4 class="modal-title panel-title" style="font-size: 18px;float:left">"Đổi mật khẩu"</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            @using (Html.BeginForm("ChangePasswordSysUser", "SysUsrUser", FormMethod.Post, new { id = "frmChangePassword" }))
-            {
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="psw"><span class="form-icon lin lin-key"></span> Mật khẩu cũ<span style="color:red">*</span></label>
-                        @Html.PasswordFor(m => m.passwordOld, new { @class = "form-control", @type = "password", placeholder = "Password Old" })
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span>"Mật khẩu cũ"<span style="color:red">*</span></label>
+                    <input type="password" class="form-control" id="OldPassword" placeholder="Nhập mật khẩu cũ">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="psw"><span class="form-icon lin lin-key"></span> Mật khẩu mới<span style="color:red">*</span></label>
-                        @Html.PasswordFor(m => m.passwordNew, new { @class = "form-control", @type = "password", placeholder = "Password New" })
-                    </div>
-                    <div class="form-group">
-                        <label for="psw"><span class="form-icon lin lin-key"></span> Xác nhận mật khẩu mới<span style="color:red">*</span> </label>
-                        @Html.PasswordFor(m => m.passwordConfirm, new { @class = "form-control", @type = "password", placeholder = "Password Confirm" })
-                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" id="btnchangepassword" class="btn btn-success btn-sm float-sm-right btnchangepassword"><span class="fa fa-save"></span>Lưu</button>
-                    <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Đóng</button>
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span> Mật khẩu mới<span style="color:red">*</span></label>
+                    <input type="password" class="form-control" id="Password" placeholder=" Nhập mật khẩu mới">
                 </div>
-            }
+                <div class="form-group">
+                    <label for="psw"><span class="form-icon lin lin-key"></span> Xác nhận mật khẩu<span style="color:red">*</span> </label>
+                    <input type="password" class="form-control" id="ConfimPassword" placeholder="Xác nhận mật khẩu">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnchangepassword" class="btn btn-success btn-sm float-sm-right btnchangepassword"><span class="fa fa-save"></span>Lưu</button>
+                <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+            </div>
         </div>
     </div>
 </div>

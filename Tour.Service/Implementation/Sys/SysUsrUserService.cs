@@ -15,6 +15,16 @@ namespace Tour.Service
         {
             _sysUsrUserProvider = new SysUsrUserProvider(appId, userId);
         }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Lấy danh sách người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<SysUsrUserModel> GetListSysUsrUser(SysUsrUserFilterModel model)
+        {
+            return _sysUsrUserProvider.GetListSysUsrUser(model);
+        }
 
         /// <summary>
         /// CreateBy: dtr
@@ -24,7 +34,7 @@ namespace Tour.Service
         /// <returns></returns>
         public bool ChangePassSysUser(RequestChangePassModel model)
         {
-            return _sysUsrUserProvider.ChangePassSys(model);
+            return _sysUsrUserProvider.ChangePassSysUser(model);
         }
 
         /// <summary>
@@ -36,6 +46,26 @@ namespace Tour.Service
         public UserLoginModel LoginSys(LoginRequestModel model)
         {
             return _sysUsrUserProvider.LoginSys(model);
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Lấy danh sách quyền của người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<SysUserRoleModel> GetSysUserRoleByUser(string userCde)
+        {
+            return _sysUsrUserProvider.GetSysUserRoleByUser(userCde);
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Thêm quyền người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool InsertSysUserRoleByUser(List<SysUserRoleModel> model)
+        {
+            return _sysUsrUserProvider.InsertSysUserRoleByUser(model);
         }
     }
 }

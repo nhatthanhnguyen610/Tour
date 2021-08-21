@@ -11,7 +11,5 @@ namespace Tour.Base
     {
         [FromQuery]
         public string createdBy { get; set; }
-        [FromQuery]
-        public string modifiedBy { get; set; }
     }
 }

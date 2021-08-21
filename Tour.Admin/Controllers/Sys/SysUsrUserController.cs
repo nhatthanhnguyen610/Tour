@@ -21,7 +21,42 @@ namespace Tour.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var vm = new SysUsrUserVM();
+            try
+            {
+                var model = new SysUsrUserFilterModel();
+                vm.p = vm.p == 0 ? 1 : vm.p;
+                model.pageIndex = vm.p;
+                model.pageSize = DefinedConstants.RowPerPage;
+                var _listUser = _sysUsrUserService.GetListSysUsrUser(model);
+                vm.ListUser = _listUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(vm);
+        }
+        /// <summary>
+        /// _Index
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public PartialViewResult _Index(SysUsrUserVM vm)
+        {
+            try
+            {
+                ViewBag.Paging = vm.p;
+                var viewModel = vm.ConvertObject<SysUsrUserVM, SysUsrUserFilterModel>();
+                viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
+                viewModel.pageSize = DefinedConstants.RowPerPage;
+                vm.ListUser = _sysUsrUserService.GetListSysUsrUser(viewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PartialView(vm);
         }
         /// <summary>
         ///  Author: thanhnn
@@ -79,7 +114,56 @@ namespace Tour.Admin.Controllers
                 throw ex;
             }
         }
-
+        /// <summary>
+        ///  Author: thanhnn
+        ///  Description: Phân quyền
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public PartialViewResult _Role(string userCde)
+        {
+            var vm = new SysUsrRoleViewModel();
+            try
+            {
+                vm.ListSysUsrRole = _sysUsrUserService.GetSysUserRoleByUser(userCde);
+                vm.userCde = userCde;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PartialView(vm);
+        }
+        /// <summary>
+        ///  Author: thanhnn
+        ///  Description: Phân quyền
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult _Role(SysUsrRoleViewModel vm)
+        {
+            List<SysUserRoleModel> lstModel = new List<SysUserRoleModel>();
+            foreach (var item in vm.ListSysUsrRole)
+            {
+                if (item.isSelected == true)
+                {
+                    lstModel.Add(new SysUserRoleModel()
+                    {
+                        createdBy = Constants.UserCde,
+                        userCde = vm.userCde,
+                        menuCde = item.menuCde,
+                        isSelected = item.isSelected
+                    });
+                }
+            }
+            var submitResult = _sysUsrUserService.InsertSysUserRoleByUser(lstModel);
+            return Json(new
+            {
+                IsSuccess = submitResult,
+                Message = submitResult ? "Thành công" : "Không thành công"
+            });
+        }
         /// <summary>
         ///  Author: dtr
         ///  Description: doi mat khau
@@ -88,37 +172,36 @@ namespace Tour.Admin.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult ChangePasswordSysUser(ChangePassViewModel model)
+        public ActionResult ChangePasswordSysUser(string OldPassword, string Password, string ConfimPassword)
         {
-            try
+            if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(ConfimPassword))
             {
-                if (model.passwordNew != model.passwordConfirm || model.passwordOld != Constants.Password)
+                return Json(new
                 {
-                    return View(new ChangePassViewModel()
-                    {
-                        errorMessage = "Mat khau khong dung"
-                    }) ;
-                }
-                var infoMemer = _sysUsrUserService.ChangePassSysUser(
-                    new RequestChangePassModel()
-                    {
-                        userCde = Constants.UserCde,
-                        passWordOld = model.passwordOld,
-                        passWordNew = model.passwordNew,
-                        passWordConfirm = model.passwordConfirm
-                    });
-                if (infoMemer == true)
-                {
-                    Constants.Password = model.passwordNew;
-                    return RedirectToAction("Index", "Home");
-                }
-                model.errorMessage = "Mat khau sai";
-                return View(model);
+                    IsSuccess = false,
+                    Message = "Mật khẩu không được để trống"
+                });
             }
-            catch (Exception ex)
+            if (Password != ConfimPassword)
             {
-                throw ex;
+                return Json(new
+                {
+                    IsSuccess = false,
+                    Message = "Xác nhận mật khẩu không trùng nhau"
+                });
             }
+            var viewModel = new RequestChangePassModel()
+            {
+                passWordNew = Password,
+                userCde = Constants.UserCde,
+                passWordOld = OldPassword
+            };
+            var result = _sysUsrUserService.ChangePassSysUser(viewModel);
+            return Json(new
+            {
+                IsSuccess = result,
+                Message = result ? "Đổi mật khẩu thành công" : (!result ? "Đổi mật khẩu không thành công" : "Nhập mật khẩu cũ không chính xác")
+            });
         }
     }
 }
