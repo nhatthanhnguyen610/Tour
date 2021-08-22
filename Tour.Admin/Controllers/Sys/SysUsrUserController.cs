@@ -132,7 +132,7 @@ namespace Tour.Admin.Controllers
             {
                 throw ex;
             }
-            return PartialView(vm);
+            return PartialView("_Role",vm);
         }
         /// <summary>
         ///  Author: thanhnn

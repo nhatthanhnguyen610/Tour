@@ -177,6 +177,18 @@
             $("#changePassword").modal();
         });
     });
+
+    var RoleURL = $('#modalplace');
+
+    $(function () {
+        $('button[data-toggle="modal"]').click(function (event) {
+            var url = $(this).data('url');
+            $.get(url).done(function (data) {
+                RoleURL.html(data);
+                RoleURL.find('.modal').modal('show');
+            })
+        })
+    })
 </script>
 <div class="modal fade" id="changePassword" role="dialog">
     <div class="modal-dialog">

@@ -82,12 +82,12 @@
                                    class="btn btn-sm btn-success btn-radius-left btn-delete btnresetpass">
                                     <span class="fa fa-sync"></span>Đặt lại mật khẩu
                                 </a>
-                                <div class="model fade" id="RoleModal" role="dialog" data-url="@Url.Action("_Role", "SysUsrUser", new { userCde = item.userCode})"></div>
-                                <button class="btn btn-warning btn-radius-right br2 btn-xs fs12 m1 dsoft-btn-show-popup"
+                                <button type="button"
+                                        class="btn btn-warning btn-radius-right br2 btn-xs fs12 m1 dsoft-btn-show-popup"
                                         data-toggle="modal"
                                         data-target="#RoleModal"
-                                        id="btnOpenRole">
-                                    <span class='fa fa-bars'></span>Phân quyền
+                                        data-url="@Url.Action("_Role", "SysUsrUser", new { userCde = item.userCode})">
+                                    <span class='fa fa-bars'>Phân quyền</span>
                                 </button>
                             </td>
                         </tr>
@@ -110,3 +110,7 @@
     }
 </div>
 
+
+<div id='modalplace'>
+   
+</div>

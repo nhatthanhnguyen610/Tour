@@ -2,54 +2,60 @@
 @{
     Layout = null;
 }
-@using (Html.BeginForm("_Role", "SysUsrUser", FormMethod.Post, new { id = "frmRole" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(m => m.userCde)
-    <div class="card-body">
-        <div class="section">
-            <table class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            Phân quyền user
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.ListSysUsrRole.Count; i++)
-                    {
-                        var item = Model.ListSysUsrRole[i];
-                        <tr>
-                            <td>
-                                @*<div class="form-check">
-                                        @Html.Hidden(string.Format("ListSysUsrRole[{0}].menuCde", i), item.menuCde)
-                                        <input class="form-check-input" type="checkbox" name="ListSysUsrRole[@i].isSelected" value="true" @(item.isSelected ? "checked" : "")>
-                                        <label class="form-check-label">
-                                            @LanguageHelper.Value(item.menuTitleCde)
-                                        </label>
-                                    </div>*@
-                                <div class="row">
-                                    @Html.Hidden(string.Format("ListSysUsrRole[{0}].menuCde", i), item.menuCde)
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" name="ListSysUsrRole[@i].isSelected" id="ListSysUsrRole[@i].isSelected" value="true" @(item.isSelected ? "checked" : "")>
-                                        <label for="ListSysUsrRole[@i].isSelected">
-                                            @item.menuTitleCde
-                                        </label>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+<div id="RoleModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        @using (Html.BeginForm("_Role", "SysUsrUser", FormMethod.Post, new { id = "frmRole" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.userCde)
+            <div class="card-body">
+                <div class="section">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Phân quyền user
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.ListSysUsrRole.Count; i++)
+                            {
+                                var item = Model.ListSysUsrRole[i];
+                                <tr>
+                                    <td>
+                                        @*<div class="form-check">
+                                            @Html.Hidden(string.Format("ListSysUsrRole[{0}].menuCde", i), item.menuCde)
+                                            <input class="form-check-input" type="checkbox" name="ListSysUsrRole[@i].isSelected" value="true" @(item.isSelected ? "checked" : "")>
+                                            <label class="form-check-label">
+                                                @LanguageHelper.Value(item.menuTitleCde)
+                                            </label>
+                                        </div>*@
+                                        <div class="row">
+                                            @Html.Hidden(string.Format("ListSysUsrRole[{0}].menuCde", i), item.menuCde)
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" name="ListSysUsrRole[@i].isSelected" id="ListSysUsrRole[@i].isSelected" value="true" @(item.isSelected ? "checked" : "")>
+                                                <label for="ListSysUsrRole[@i].isSelected">
+                                                    @item.menuTitleCde
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-        <div class="modal-footer">
-            <button type="button" id="btnConfigRole" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
-            <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfigRole" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                    <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                </div>
+            </div>
+        }
         </div>
     </div>
-}
+</div>
 
