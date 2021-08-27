@@ -1,23 +1,16 @@
 ﻿$(window).on("load", function () {
     sysuser.init();
 });
-function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-};
-var validate = false;
 var sysuser = {
     init: function () {
         $('body').on('click', '.btnDelete', sysuser.DeleteFunc);
         $('body').on('click', '#btnConfigRole', sysuser.ConfigRole);
         $('body').on('click', '#btnSubmit', sysuser.InsertFunc); 
         $('body').on('change', '#file', sysuser.AvatarURL);
-        $('body').on('change', '#email', sysuser.ValidateEmail);
         $('body').on('click', '#btnUpdate', sysuser.UpdateFunc); 
     },
     UpdateFunc: function () {
-        var val = sysuser.ValidateEmail;
-        if (val) {
+        if ($('#frmUpdate').valid()) {
             var _self = $('#frmUpdate');
             var _selfForm = new FormData();
             if (document.getElementById("file").files != null) {
@@ -53,22 +46,6 @@ var sysuser = {
             });
         }
     },
-    ValidateEmail: function () {
-        const $result = $("#result");
-        const email = $("#email").val();
-        $result.text("");
-
-        if (validateEmail(email))
-        {
-            validate = true;
-        }
-        else{
-            $result.text("email is not valid");
-            $result.css("color", "red");
-            validate = false;
-        }
-        return false;
-    },
     //Upload image
     AvatarURL: function () {
         if ($('#file').val().trim() === '') {
@@ -78,7 +55,7 @@ var sysuser = {
         $('#uploader').val(_image);
     },  
     InsertFunc: function () {
-        if (validate) {
+        if ($('#frmCreate').valid()) {
             var _self = $('#frmCreate');
             var _selfForm = new FormData();
             if (document.getElementById("file").files != null) {

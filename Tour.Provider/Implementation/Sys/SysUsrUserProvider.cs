@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tour.Base;
+using Tour.Common.Constants;
 using Tour.Provider.Connection;
 using static Tour.Provider.Connection.ConnectString;
 
@@ -147,6 +148,102 @@ namespace Tour.Provider
                 tran.Complete();
                 return true;
             }
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Thêm mới người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool InsertSysUser(SysUsrUserModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.userName,
+                model.password,
+                model.fullName,
+                model.birthday,
+                model.address,
+                model.email,
+                model.phone,
+                model.avatar,
+                model.isActive,
+                model.createdBy
+            };
+            var result = base.ExeScalar("sp_SysUsrUser_Insert_V01", paramObj);
+            if (result != null && result.ToString().Equals("1"))
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: lấy thông tin người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public SysUsrUserModel GetInfoSysUsrUser(decimal userID)
+        {
+            var paramObj = new object[]
+            {
+               userID
+            };
+            var result = base.ExecProcedure<SysUsrUserModel>("sp_SysUsrUser_GetInfo_V01", paramObj);
+            if (result.Any())
+            {
+                return result.FirstOrDefault();
+            }
+            return new SysUsrUserModel();
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Cập nhật người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateSysUsrUser(SysUsrUserModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.userID,
+                model.userName,
+                model.password,
+                model.fullName,
+                model.birthday,
+                model.address,
+                model.email,
+                model.phone,
+                model.avatar,
+                model.isActive,
+                model.createdBy
+            };
+            var result = base.ExeScalar("sp_SysUsrUser_Update_V01", paramObj);
+            if (result != null && result.ToString().Equals(ResultCode.Success))
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: kiểm tra Email trùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool IsEmailUsed(SysUsrUserModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.userID,
+                model.email
+            };
+            var result = base.ExeScalar("sp_SysUsrUser_GetListByEmail_V01", paramObj);
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

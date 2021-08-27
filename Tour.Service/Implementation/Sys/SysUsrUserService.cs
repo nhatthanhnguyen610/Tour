@@ -67,5 +67,45 @@ namespace Tour.Service
         {
             return _sysUsrUserProvider.InsertSysUserRoleByUser(model);
         }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Thêm mới người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool InsertSysUser(SysUsrUserModel model)
+        {
+            return _sysUsrUserProvider.InsertSysUser(model);
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: lấy thông tin người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public SysUsrUserModel GetInfoSysUsrUser(decimal userID)
+        {
+            return _sysUsrUserProvider.GetInfoSysUsrUser(userID);
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Cập nhật người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateSysUsrUser(SysUsrUserModel model)
+        {
+            return _sysUsrUserProvider.UpdateSysUsrUser(model);
+        }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: kiểm tra Email trùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool IsEmailUsed(SysUsrUserModel model)
+        {
+            return _sysUsrUserProvider.IsEmailUsed(model);
+        }
     }
 }

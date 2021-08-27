@@ -8,7 +8,15 @@
                 @await Html.PartialAsync("_Partial_HeaderInfo")
             </div>
             <div class="col-sm-6">
-                @HtmlPageHelper.IframeButton("Thêm mới", Url.Action("_Create", "SysUsrUser"), "<span class='fa fa-plus fa-fw'></span>", 1000, 200, new { @class = "btn btn-success btn-sm float-sm-right btn-popup-size" })
+                <button type="button"
+                        class="btn btn-success btn-sm float-sm-right btn-popup-size"
+                        data-toggle="modal"
+                        data-target="#RoleModal"
+                        data-width="1000"
+                        data-height="600"
+                        data-url="@Url.Action("_Create", "SysUsrUser")">
+                    <span class='fa fa-plus fa-fw'></span>Thêm mới
+                </button>
             </div>
         </div>
     </div><!-- /.container-fluid -->

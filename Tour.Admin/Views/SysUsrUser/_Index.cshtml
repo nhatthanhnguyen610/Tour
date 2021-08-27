@@ -69,12 +69,12 @@
                                 </a>
 
                                 <a href="javascript:void(0);"
-                                   data-message-confirm="Xóa"
+                                   data-message-confirm="Bạn có chắc muốn xóa"
                                    action="@Url.Action("_Delete", "SysUsrUser",new { userID = item.userID  })"
                                    data-id="@item.userID"
                                    class="btn btn-sm btn-danger btn-radius-right btn-delete btnDelete">
                                     <span class="fa fa-trash"></span>Xóa
-                                </a>
+                                </a><br />
                                 <a href="javascript:void(0);"
                                    data-message-confirm="Đặt lại mật khẩu"
                                    action="@Url.Action("_Resetpass", "SysUsrUser",new { userID = item.userID })"
@@ -83,11 +83,11 @@
                                     <span class="fa fa-sync"></span>Đặt lại mật khẩu
                                 </a>
                                 <button type="button"
-                                        class="btn btn-warning btn-radius-right br2 btn-xs fs12 m1 dsoft-btn-show-popup"
+                                        class="btn btn-warning btn-radius-right br2 btn-xs fs12 m1 btn-show-popup"
                                         data-toggle="modal"
                                         data-target="#RoleModal"
                                         data-url="@Url.Action("_Role", "SysUsrUser", new { userCde = item.userCode})">
-                                    <span class='fa fa-bars'>Phân quyền</span>
+                                    <span class='fa fa-bars'></span>Phân quyền
                                 </button>
                             </td>
                         </tr>

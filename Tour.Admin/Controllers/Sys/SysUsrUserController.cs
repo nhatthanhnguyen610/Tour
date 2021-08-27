@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Tour.Admin.Models;
@@ -87,7 +88,7 @@ namespace Tour.Admin.Controllers
                 {
                     return View(new LoginViewModel()
                     {
-                        errorMessage = "Người dùng hoặc tên đăng nhập không được để trống"
+                        errorMessage = ResultStatus.UserLoginNull
                     }) ;
                 }
                 var infoMemer = _sysUsrUserService.LoginSys(
@@ -106,7 +107,7 @@ namespace Tour.Admin.Controllers
                     HttpContext.Session.SetString(DefinedConstants.SessionUser, strData);
                     return RedirectToAction("Index", "Home", new ChangePassViewModel());
                 }
-                viewModel.errorMessage = "Đăng nhập không thành công";
+                viewModel.errorMessage = ResultStatus.UserLoginFail;
                 return View(viewModel);
             }
             catch (Exception ex)
@@ -161,8 +162,90 @@ namespace Tour.Admin.Controllers
             return Json(new
             {
                 IsSuccess = submitResult,
-                Message = submitResult ? "Thành công" : "Không thành công"
+                Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
             });
+        }
+        /// <summary>
+        /// _Create
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult _Create()
+        {
+            var vm = new SysUsrUserViewModel();
+            vm.avatar = string.IsNullOrWhiteSpace(vm.avatar) ? DefinedConstants.NoImageLink : vm.avatar;
+            vm.birthdayView = DateTime.Now;
+            return View(vm);
+        }
+        /// <summary>
+        /// _Create
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> _Create(SysUsrUserViewModel vm)
+        {
+            vm.birthday = vm.birthdayView;
+            var model = vm.ConvertObject<SysUsrUserViewModel, SysUsrUserModel>();
+            try
+            {
+                string uploads = string.Format("{0}{1}", PathServer.pathDir, PathServer.pathAvatar);
+                foreach (var formFile in Request.Form.Files)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var fileName = DateTime.Now.ToString(PathServer.yyyyMMddhhmmssfff);
+                        var fileExtension = Path.GetExtension(formFile.FileName);
+                        string fileAvatar = fileName + fileExtension;
+                        string filePath = Path.Combine(uploads, fileAvatar);
+                        if (!Directory.Exists(Path.GetDirectoryName(uploads)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(uploads));
+                        }
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(fileStream);
+                        }
+                        model.avatar = string.Format("{0}{1}{2}", PathServer.PathLink, PathServer.pathAvatar, fileAvatar);
+                    }
+                }
+                model.createdBy = Constants.UserCde;
+                if (_sysUsrUserService.IsEmailUsed(model))
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = "Email đã có người dùng"
+                    });
+                }
+                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.address) && !string.IsNullOrWhiteSpace(model.password))
+                {
+                    var submitResult = _sysUsrUserService.InsertSysUser(model);
+                    return Json(new
+                    {
+                        IsSuccess = submitResult,
+                        Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = ResultStatus.FAIL
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = false,
+                    Message = ResultStatus.ERROR
+                });
+            }
         }
         /// <summary>
         ///  Author: dtr
@@ -179,7 +262,7 @@ namespace Tour.Admin.Controllers
                 return Json(new
                 {
                     IsSuccess = false,
-                    Message = "Mật khẩu không được để trống"
+                    Message = ResultStatus.UserPassNull
                 });
             }
             if (Password != ConfimPassword)
@@ -187,7 +270,7 @@ namespace Tour.Admin.Controllers
                 return Json(new
                 {
                     IsSuccess = false,
-                    Message = "Xác nhận mật khẩu không trùng nhau"
+                    Message = ResultStatus.UserPassNotMatch
                 });
             }
             var viewModel = new RequestChangePassModel()
@@ -200,7 +283,7 @@ namespace Tour.Admin.Controllers
             return Json(new
             {
                 IsSuccess = result,
-                Message = result ? "Đổi mật khẩu thành công" : (!result ? "Đổi mật khẩu không thành công" : "Nhập mật khẩu cũ không chính xác")
+                Message = result ? ResultStatus.SUCCESS : (!result ? ResultStatus.FAIL : ResultStatus.UserOldPass)
             });
         }
     }

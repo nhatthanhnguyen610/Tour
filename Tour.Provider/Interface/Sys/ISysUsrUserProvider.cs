@@ -45,5 +45,33 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         bool InsertSysUserRoleByUser(List<SysUserRoleModel> model);
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Thêm mới người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool InsertSysUser(SysUsrUserModel model);
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: lấy thông tin người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        SysUsrUserModel GetInfoSysUsrUser(decimal userID);
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Cập nhật người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool UpdateSysUsrUser(SysUsrUserModel model);
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: kiểm tra Email trùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool IsEmailUsed(SysUsrUserModel model);
     }
 }
