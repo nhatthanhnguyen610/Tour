@@ -10,8 +10,8 @@
             <div class="col-sm-6">
                 <button type="button"
                         class="btn btn-success btn-sm float-sm-right btn-popup-size"
-                        data-toggle="modal"
-                        data-target="#RoleModal"
+                        data-toggle="modalAction"
+                        data-target="#RoleModalAction"
                         data-width="1000"
                         data-height="600"
                         data-url="@Url.Action("_Create", "SysUsrUser")">
@@ -66,4 +66,21 @@
 @section Scripts{
     <script src="~/assets/js/sysusruser.js"></script>
     <script src="~/assets/js/fileupload.js"></script>
+    <script>
+        var RoleCreateURL = $('#modalActionPlace');
+
+        $(function () {
+            $('button[data-toggle="modalAction"]').click(function (event) {
+                var url = $(this).data('url');
+                $.get(url).done(function (data) {
+                    RoleCreateURL.html(data);
+                    RoleCreateURL.find('.modal').modal('show');
+                })
+            })
+        })
+    </script>
 }
+
+<div id="modalActionPlace">
+
+</div>
