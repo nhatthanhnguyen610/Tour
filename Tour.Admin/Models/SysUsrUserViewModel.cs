@@ -67,4 +67,21 @@ namespace Tour.Admin.Models
         public string avatar { get; set; }
         public bool isActive { get; set; }
     }
+    public class SysMenuUserVM
+    {
+        public SysMenuUserVM()
+        {
+            ListMenuUser = new List<SysMenuUserModel>();
+        }
+        public int p { get; set; }
+        public string keyWord { get; set; }
+        public List<SysMenuUserModel> ListMenuUser { get; set; }
+        public int TotalRows
+        {
+            get
+            {
+                return ListMenuUser != null ? (ListMenuUser.Count > 0 ? ListMenuUser.First().totalRows : 0) : 0;
+            }
+        }
+    }
 }

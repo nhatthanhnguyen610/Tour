@@ -89,6 +89,30 @@ namespace Tour.Provider
             }
             return null;
         }
+
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách quyền menu của người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model)
+        {
+            var paramObj = new object[]
+            {
+
+                model.keyWord,
+                model.pageIndex,
+                model.pageSize
+            };
+            var resultMenu = base.ExecProcedure<SysMenuUserModel>("sp_SysUsrUser_GetMenuList_V01", paramObj);
+            if (resultMenu.Any())
+            {
+                return resultMenu.ToList();
+            }
+            return null;
+        }
+
         /// <summary>
         /// CreateBy: thanhnn
         /// Description: Lấy danh sách quyền của người dùng

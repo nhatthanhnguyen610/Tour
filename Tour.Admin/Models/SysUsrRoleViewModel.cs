@@ -15,4 +15,6 @@ namespace Tour.Admin.Models
         public string userCde { get; set; }
         public List<SysUserRoleModel> ListSysUsrRole { get; set; }
     }
+
+
 }

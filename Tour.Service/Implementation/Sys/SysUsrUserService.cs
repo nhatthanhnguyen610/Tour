@@ -58,6 +58,16 @@ namespace Tour.Service
             return _sysUsrUserProvider.GetSysUserRoleByUser(userCde);
         }
         /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách quyền menu của người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model)
+        {
+            return _sysUsrUserProvider.GetListMenuSysUsr(model);
+        }
+        /// <summary>
         /// CreateBy: thanhnn
         /// Description: Thêm quyền người dùng
         /// </summary>
