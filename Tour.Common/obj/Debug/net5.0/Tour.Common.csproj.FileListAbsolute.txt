@@ -1,0 +1,15 @@
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\Tour.Common.deps.json
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\Tour.Common.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\ref\Tour.Common.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\Tour.Common.pdb
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\Tour.Base.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\bin\Debug\net5.0\Tour.Base.pdb
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.csproj.AssemblyReference.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.AssemblyInfoInputs.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.AssemblyInfo.cs
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.csproj.CoreCompileInputs.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.csproj.CopyComplete
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\ref\Tour.Common.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Common\obj\Debug\net5.0\Tour.Common.pdb

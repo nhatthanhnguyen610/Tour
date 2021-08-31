@@ -1,0 +1,12 @@
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\bin\Debug\net5.0\Tour.Base.deps.json
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\bin\Debug\net5.0\Tour.Base.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\bin\Debug\net5.0\ref\Tour.Base.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\bin\Debug\net5.0\Tour.Base.pdb
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.csproj.AssemblyReference.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.AssemblyInfoInputs.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.AssemblyInfo.cs
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.csproj.CoreCompileInputs.cache
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\ref\Tour.Base.dll
+C:\Users\Computer\Desktop\doan\Tour\Tour.Base\obj\Debug\net5.0\Tour.Base.pdb
