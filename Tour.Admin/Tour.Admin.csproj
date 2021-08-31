@@ -7,11 +7,19 @@
   </PropertyGroup>
 	
  <ItemGroup>
+    <Compile Remove="Controllers\Menu\**" />
     <Compile Remove="se\**" />
+    <Content Remove="Controllers\Menu\**" />
     <Content Remove="se\**" />
+    <EmbeddedResource Remove="Controllers\Menu\**" />
     <EmbeddedResource Remove="se\**" />
+    <None Remove="Controllers\Menu\**" />
     <None Remove="se\**" />
   </ItemGroup>
+	
+ <ItemGroup>
+   <Compile Remove="Controllers\Sys\HomeController.cs" />
+ </ItemGroup>
 	
  <ItemGroup>
    <Content Remove="Views\SysUsrUser\Index1.cshtml" />
