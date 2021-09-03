@@ -179,13 +179,20 @@
     });
 
     var RoleURL = $('#modalplace');
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    $(function () {
+    $(document).ready(function () {
         $('button[data-toggle="modal"]').click(function (event) {
             var url = $(this).data('url');
             $.get(url).done(function (data) {
                 RoleURL.html(data);
                 RoleURL.find('.modal').modal('show');
+                RoleURL.find('#btnConfigRole').click(function () {
+                    $('.modal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    //await delay(2300);
+                    //location.reload();
+                })
             })
         })
     })
