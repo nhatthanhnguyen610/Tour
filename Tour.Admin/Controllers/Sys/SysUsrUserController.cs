@@ -166,8 +166,10 @@ namespace Tour.Admin.Controllers
             });
         }
         /// <summary>
-        /// _Create
+        ///  Author: thanhnn
+        ///  Description: tạo mới
         /// </summary>
+        /// <param name=""></param>
         /// <returns></returns>
         [HttpGet]
         public IActionResult _Create()
@@ -178,9 +180,10 @@ namespace Tour.Admin.Controllers
             return View(vm);
         }
         /// <summary>
-        /// _Create
+        ///  Author: thanhnn
+        ///  Description: tạo mới
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name=""></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
@@ -208,10 +211,98 @@ namespace Tour.Admin.Controllers
                         {
                             await formFile.CopyToAsync(fileStream);
                         }
-                        model.avatar = string.Format("{0}{1}{2}", PathServer.PathLink, PathServer.pathAvatar, fileAvatar);
+                        model.avatar = string.Format("{0}{1}{2}", PathServer.pathAvatar, fileAvatar);
                     }
                 }
                 model.createdBy = Constants.UserCde;
+                if (_sysUsrUserService.IsEmailUsed(model))
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = "Email đã có người dùng"
+                    });
+                }
+                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.address) && !string.IsNullOrWhiteSpace(model.password))
+                {
+                    var submitResult = _sysUsrUserService.InsertSysUser(model);
+                    return Json(new
+                    {
+                        IsSuccess = submitResult,
+                        Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = ResultStatus.FAIL
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = false,
+                    Message = ResultStatus.ERROR
+                });
+            }
+        }
+        /// <summary>
+        ///  Author: thanhnn
+        ///  Description: cập nhật
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public IActionResult _Update(decimal userID)
+        {
+            var vm = new SysUsrUserViewModel();
+            try
+            {
+
+                var _lstUser = _sysUsrUserService.GetInfoSysUsrUser(userID);
+                vm = _lstUser.ConvertObject<SysUsrUserModel, SysUsrUserViewModel>();
+
+                vm.avatar = string.IsNullOrWhiteSpace(vm.avatar) ? DefinedConstants.NoImageLink : vm.avatar;
+                vm.birthdayView = vm.birthday.Value;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(vm);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> _Update(SysUsrUserViewModel vm)
+        {
+            vm.birthday = vm.birthdayView;
+            var model = vm.ConvertObject<SysUsrUserViewModel, SysUsrUserModel>();
+            try
+            {
+                string uploads = string.Format("{0}{1}", PathServer.pathDir, PathServer.pathAvatar);
+                foreach (var formFile in Request.Form.Files)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var fileName = DateTime.Now.ToString(PathServer.yyyyMMddhhmmssfff);
+                        var fileExtension = Path.GetExtension(formFile.FileName);
+                        string fileAvatar = fileName + fileExtension;
+                        string filePath = Path.Combine(uploads, fileAvatar);
+                        if (!Directory.Exists(Path.GetDirectoryName(uploads)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(uploads));
+                        }
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(fileStream);
+                        }
+                        model.avatar = string.Format("{0}{1}{2}", PathServer.pathAvatar, fileAvatar);
+                    }
+                }
                 if (_sysUsrUserService.IsEmailUsed(model))
                 {
                     return Json(new

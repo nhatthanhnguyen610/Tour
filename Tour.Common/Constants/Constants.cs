@@ -8,15 +8,11 @@ namespace Tour.Common.Constants
 {
     public static class Constants
     {
-        public const string SecretKey = "SecretKey";
         public const string TypeLanguage = "Language";
-        public const string Authorization = "Authorization";
         public const string AppSettings = "AppSettings";
         public const string Logging = "Logging";
         public const string LogLevel = "LogLevel";
         public const string LogPath = "C:\\erp_log\\";
-        public const string Issuer = "http://dsoft.software";
-        public const string Audience = "http://erp-admin.dsoft.software";
         public const string ContentTypeJson = "application/json";
         public const string ContentTypeFormdata = "multipart/form-data";
         public const string No_Image = "/assets/image/no_image_available.jpg";
@@ -85,10 +81,8 @@ namespace Tour.Common.Constants
         public const string PDF = ".pdf";
         public const string DOCX = ".docx";
         public static string PathUpload = "Upload";
-        public static string PathLink = "http://erp-admin.dsoft.software/Upload/";
-        public static string PathMailTemplate = "http://210.2.98.74:8099/TemplateMail/email-template.html";
         public const string pathFileExport = @"C:/EXPORT/";
-        public const string pathDir = @"C:/Users/DELL/source/repos/Tour/Tour.Admin/wwwroot/assets/";
+        public const string pathDir = @"C:/Users/DELL/Documents/GitHub/Tour/Tour.Admin/wwwroot/assets/";
         public const string pathAvatar = @"image/avatar/";
         public const string pathSlider = @"Image/slider/";
         public const string pathBlog = @"Image/blog/";

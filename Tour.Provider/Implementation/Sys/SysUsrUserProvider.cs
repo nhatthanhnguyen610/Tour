@@ -159,7 +159,8 @@ namespace Tour.Provider
                                 {
                                     item.userCde,
                                     item.menuCde,
-                                    item.createdBy
+                                    item.createdBy,
+                                    item.isSelected
                                 };
                             var result = base.ExeScalar("sp_SysUserRole_Insert_V01", paramObjAdd);
                             if (result == null || !result.ToString().Equals("1"))

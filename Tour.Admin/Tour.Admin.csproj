@@ -12,10 +12,6 @@
     <EmbeddedResource Remove="se\**" />
     <None Remove="se\**" />
   </ItemGroup>
-	
- <ItemGroup>
-   <Content Remove="Views\SysUsrUser\Index1.cshtml" />
- </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Tour.Common\Tour.Common.csproj" />
