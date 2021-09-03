@@ -32,7 +32,7 @@ namespace Tour.Provider.Connection
                     {
                         Key ="DBConnection",
 
-                        Value ="Data Source=27.78.38.8,1433;Initial Catalog=Tour;User ID=sa;Password=123456;Connection Timeout=3000;"
+                        Value ="Data Source=171.232.87.132,1433;Initial Catalog=Tour;User ID=sa;Password=123456;Connection Timeout=3000;"
                     }
                 },
             };
