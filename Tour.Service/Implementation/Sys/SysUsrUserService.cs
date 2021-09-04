@@ -117,5 +117,35 @@ namespace Tour.Service
         {
             return _sysUsrUserProvider.IsEmailUsed(model);
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: kiểm tra MenuTitle trùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool IsMenuTitlelUsed(SysMenuUserModel model)
+        {
+            return _sysUsrUserProvider.IsMenuTitlelUsed(model);
+        }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Thêm Menu mới
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool InsertSysMenu(SysMenuUserModel model)
+        {
+            return _sysUsrUserProvider.InsertSysMenu(model);
+        }
+
+        public SysMenuUserModel GetInfoSysUsrMenu(decimal menuID)
+        {
+            return _sysUsrUserProvider.GetInfoSysUsrMenu(menuID);
+        }
+
+        public bool UpdateSysUsrMenu(SysMenuUserModel model)
+        {
+            return _sysUsrUserProvider.UpdateSysUsrMenu(model);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,5 +59,140 @@ namespace Tour.Admin.Controllers.Menu
             }
             return PartialView(vm);
         }
-    }
+
+        /// <summary>
+        ///  Author: dtr
+        ///  Description: Tạo menu hệ thống
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public IActionResult _Create()
+        {
+            return View(new SysMenuUserViewModel());
+        }
+
+        /// <summary>
+        ///  Author: dtr
+        ///  Description: Tạo menu hệ thống
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Create(SysMenuUserViewModel vm)
+        {
+            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            model.createdBy = Constants.UserCde;
+            model.orderBy = 1;
+            try
+            {
+                if (_sysUsrUserService.IsMenuTitlelUsed(model))
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = "Title đã có người dùng"
+                    });
+                }
+                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuIcon)
+                    && !string.IsNullOrWhiteSpace(model.menuTitleCde) && !string.IsNullOrWhiteSpace(model.controller))
+                {
+                    var submitResult = _sysUsrUserService.InsertSysMenu(model);
+                    return Json(new
+                    {
+                        IsSuccess = submitResult,
+                        Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = ResultStatus.FAIL
+                    });
+                }
+            } 
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = false,
+                    Message = ResultStatus.ERROR
+                });
+            }
+
+        }
+        /// <summary>
+        ///  Author: dtr
+        ///  Description: cập nhật
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public IActionResult _Update(decimal menuID)
+        {
+            var vm = new SysMenuUserViewModel();
+            try
+            {
+                var _lstMenu = _sysUsrUserService.GetInfoSysUsrMenu(menuID);
+                vm = _lstMenu.ConvertObject<SysMenuUserModel, SysMenuUserViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(vm);
+        }
+        /// <summary>
+        ///  Author: dtr
+        ///  Description: cập nhật
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Update(SysMenuUserViewModel vm)
+        {
+            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            try
+            {
+                if (_sysUsrUserService.IsMenuTitlelUsed(model))
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = "Title đã có người dùng"
+                    });
+                }
+                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuIcon)
+                    && !string.IsNullOrWhiteSpace(model.menuTitleCde) && !string.IsNullOrWhiteSpace(model.controller))
+                {
+                    var submitResult = _sysUsrUserService.UpdateSysUsrMenu(model);
+                    return Json(new
+                    {
+                        IsSuccess = submitResult,
+                        Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        IsSuccess = false,
+                        Message = ResultStatus.FAIL
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = false,
+                    Message = ResultStatus.ERROR
+                });
+            }
+        }
+    }   
 }

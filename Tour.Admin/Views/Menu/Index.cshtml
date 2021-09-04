@@ -11,11 +11,11 @@
             <div class="col-sm-6">
                 <button type="button"
                         class="btn btn-success btn-sm float-sm-right btn-popup-size"
-                        data-toggle="modalAction"
-                        data-target="#RoleModalAction"
+                        data-toggle="modalMenu"
+                        data-target="#MenuModal"
                         data-width="1000"
                         data-height="600"
-                        data-url="@Url.Action("_Create", "SysUsrUser")">
+                        data-url="@Url.Action("_Create", "Menu")">
                     <span class='fa fa-plus fa-fw'></span>Thêm mới
                 </button>
             </div>
@@ -68,9 +68,9 @@
     <script src="~/assets/js/sysusruser.js"></script>
     <script src="~/assets/js/fileupload.js"></script>
     <script>
-        var RoleCreateURL = $('#modalActionPlace');
+        var RoleCreateURL = $('#menuModalPlace');
         $(function () {
-            $('button[data-toggle="modalAction"]').click(function (event) {
+            $('button[data-toggle="modalMenu"]').click(function (event) {
                 var url = $(this).data('url');
                 $.get(url).done(function (data) {
                     RoleCreateURL.html(data);
@@ -81,6 +81,6 @@
     </script>
 }
 
-<div id="modalActionPlace">
+<div id="menuModalPlace">
 
 </div> 

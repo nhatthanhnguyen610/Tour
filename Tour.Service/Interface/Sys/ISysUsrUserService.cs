@@ -44,7 +44,7 @@ namespace Tour.Service
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model);  
+        List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model);
         /// <summary>
         /// CreateBy: thanhnn
         /// Description: Thêm quyền người dùng
@@ -80,5 +80,33 @@ namespace Tour.Service
         /// <param name="model"></param>
         /// <returns></returns>
         bool IsEmailUsed(SysUsrUserModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: kiểm tra MenuTitle trùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool IsMenuTitlelUsed(SysMenuUserModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Thêm Menu mới
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool InsertSysMenu(SysMenuUserModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy thông tin menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        SysMenuUserModel GetInfoSysUsrMenu(decimal menuID);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Cập nhật menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool UpdateSysUsrMenu(SysMenuUserModel model);
     }
 }
