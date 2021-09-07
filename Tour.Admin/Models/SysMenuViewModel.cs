@@ -25,8 +25,8 @@ namespace Tour.Admin.Models
     }
     public class SysMenuUserViewModel
     {
-        public decimal menuId { get; set; }
-        public string menuCde { get; set; }
+        public decimal id { get; set; }
+        public string menuCode { get; set; }
         public string parentMenuCde { get; set; }
         public string menuTitleCde { get; set; }
         public string menuIcon { get; set; }

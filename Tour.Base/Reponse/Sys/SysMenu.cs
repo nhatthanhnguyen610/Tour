@@ -8,7 +8,7 @@ namespace Tour.Base
 {
     public class SysMenuUserModel : DefaultModel
     {
-        public int id { get; set; }
+        public decimal id { get; set; }
         public string parentMenuCde { get; set; }
         public string menuCode { get; set; }
         public string menuTitleCde { get; set; }

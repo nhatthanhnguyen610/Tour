@@ -18,7 +18,7 @@
   </ItemGroup>
 	
  <ItemGroup>
-   <Content Remove="Views\Menu\_MenuCreate.cshtml" />
+   <Content Remove="Views\SysMenu\_MenuCreate.cshtml" />
  </ItemGroup>
 
   <ItemGroup>

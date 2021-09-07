@@ -119,7 +119,7 @@ var sysuser = {
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (msg) {
                 if (msg.IsSuccess) {
-                    $('#btnSubmit').data('clicked', true);
+                    $('#btnConfigRole').data('clicked', true);
                     $(".disableBtnSave").trigger("custom");
                     $("#btnClose").trigger("click");
                     sysuser.ReloadData();

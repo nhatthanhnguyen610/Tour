@@ -137,12 +137,22 @@ namespace Tour.Service
         {
             return _sysUsrUserProvider.InsertSysMenu(model);
         }
-
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy thông tin menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public SysMenuUserModel GetInfoSysUsrMenu(decimal menuID)
         {
             return _sysUsrUserProvider.GetInfoSysUsrMenu(menuID);
         }
-
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Cập nhật menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public bool UpdateSysUsrMenu(SysMenuUserModel model)
         {
             return _sysUsrUserProvider.UpdateSysUsrMenu(model);
