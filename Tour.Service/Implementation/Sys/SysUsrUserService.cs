@@ -58,16 +58,6 @@ namespace Tour.Service
             return _sysUsrUserProvider.GetSysUserRoleByUser(userCde);
         }
         /// <summary>
-        /// CreateBy: dtr
-        /// Description: Lấy danh sách quyền menu của người dùng
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model)
-        {
-            return _sysUsrUserProvider.GetListMenuSysUsr(model);
-        }
-        /// <summary>
         /// CreateBy: thanhnn
         /// Description: Thêm quyền người dùng
         /// </summary>
@@ -116,46 +106,6 @@ namespace Tour.Service
         public bool IsEmailUsed(SysUsrUserModel model)
         {
             return _sysUsrUserProvider.IsEmailUsed(model);
-        }
-        /// <summary>
-        /// CreateBy: dtr
-        /// Description: kiểm tra MenuTitle trùng
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public bool IsMenuTitlelUsed(SysMenuUserModel model)
-        {
-            return _sysUsrUserProvider.IsMenuTitlelUsed(model);
-        }
-        /// <summary>
-        /// CreateBy: dtr
-        /// Description: Thêm Menu mới
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public bool InsertSysMenu(SysMenuUserModel model)
-        {
-            return _sysUsrUserProvider.InsertSysMenu(model);
-        }
-        /// <summary>
-        /// CreateBy: dtr
-        /// Description: Lấy thông tin menu
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public SysMenuUserModel GetInfoSysUsrMenu(decimal menuID)
-        {
-            return _sysUsrUserProvider.GetInfoSysUsrMenu(menuID);
-        }
-        /// <summary>
-        /// CreateBy: dtr
-        /// Description: Cập nhật menu
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public bool UpdateSysUsrMenu(SysMenuUserModel model)
-        {
-            return _sysUsrUserProvider.UpdateSysUsrMenu(model);
         }
     }
 }

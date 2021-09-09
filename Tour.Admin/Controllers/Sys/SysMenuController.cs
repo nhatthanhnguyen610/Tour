@@ -13,10 +13,10 @@ namespace Tour.Admin.Controllers.Menu
 {
     public class SysMenuController : BaseController
     {
-        ISysUsrUserService _sysUsrUserService;
+        ISysMenuService _sysMenuService;
         public SysMenuController()
         {
-            _sysUsrUserService = new SysUsrUserService(string.Empty);
+            _sysMenuService = new SysMenuService(string.Empty);
         }
         public IActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace Tour.Admin.Controllers.Menu
                 vm.p = vm.p == 0 ? 1 : vm.p;
                 model.pageIndex = vm.p;
                 model.pageSize = DefinedConstants.RowPerPage;
-                var _listUser = _sysUsrUserService.GetListMenuSysUsr(model);
+                var _listUser = _sysMenuService.GetListMenuSysUsr(model);
                 vm.ListMenuUser = _listUser;
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace Tour.Admin.Controllers.Menu
                 var viewModel = vm.ConvertObject<SysMenuUserVM, SysUsrUserFilterModel>();
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
-                vm.ListMenuUser = _sysUsrUserService.GetListMenuSysUsr(viewModel);
+                vm.ListMenuUser = _sysMenuService.GetListMenuSysUsr(viewModel);
 
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace Tour.Admin.Controllers.Menu
                 //}
                 if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.actionOrClass) && !string.IsNullOrWhiteSpace(model.controller))
                 {
-                    var submitResult = _sysUsrUserService.InsertSysMenu(model);
+                    var submitResult = _sysMenuService.InsertSysMenu(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -134,7 +134,7 @@ namespace Tour.Admin.Controllers.Menu
             var vm = new SysMenuUserViewModel();
             try
             {
-                var _lstMenu = _sysUsrUserService.GetInfoSysUsrMenu(menuID);
+                var _lstMenu = _sysMenuService.GetInfoSysUsrMenu(menuID);
                 vm = _lstMenu.ConvertObject<SysMenuUserModel, SysMenuUserViewModel>();
             }
             catch (Exception ex)
@@ -155,6 +155,8 @@ namespace Tour.Admin.Controllers.Menu
         public ActionResult _Update(SysMenuUserViewModel vm)
         {
             var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            model.createdBy = Constants.UserCde;
+            model.orderBy = 1;
             try
             {
                 //if (_sysUsrUserService.IsMenuTitlelUsed(model))
@@ -165,9 +167,9 @@ namespace Tour.Admin.Controllers.Menu
                 //        Message = "Title đã có người dùng"
                 //    });
                 //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuIcon) && !string.IsNullOrWhiteSpace(model.controller))
+                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.actionOrClass) && !string.IsNullOrWhiteSpace(model.controller))
                 {
-                    var submitResult = _sysUsrUserService.UpdateSysUsrMenu(model);
+                    var submitResult = _sysMenuService.UpdateSysUsrMenu(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
