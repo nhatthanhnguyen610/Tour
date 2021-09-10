@@ -247,6 +247,25 @@ namespace Tour.Provider
             }
             return false;
         }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Xóa người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool DeleteSysUsrUser(SysUsrUserModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.userID
+            };
+            var result = base.ExeScalar("sp_SysUsrUser_Delete_V01", paramObj);
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
 

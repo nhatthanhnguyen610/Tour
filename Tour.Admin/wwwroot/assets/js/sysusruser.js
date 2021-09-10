@@ -94,12 +94,11 @@ var sysuser = {
     DeleteFunc: function () {
         var _self = $(this);
         var _userID = $(this).attr('data-id');
-        var _rowVersion = $(this).attr('row-version');
         bootbox.confirm(_self.attr("data-message-confirm"), function (result) {
             if (result) {
                 $.ajax({
-                    url: '/SysUsrUser/DeleteSysUsrUser',
-                    data: { pUserID: _userID, pRowVersion:_rowVersion},
+                    url: '/SysUsrUser/Delete',
+                    data: { pUserID: _userID},
                     type: 'POST',
                     success: function (msg) {
                         msg.IsSuccess ? toastr.success(msg.Message) : toastr.error(msg.Message)

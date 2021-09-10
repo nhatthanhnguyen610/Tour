@@ -37,6 +37,7 @@ namespace Tour.Common.Constants
         public const string UserPassNull = "Mật khẩu không được để trống";
         public const string UserLoginNull = "Người dùng hoặc tên đăng nhập không được để trống";
         public const string UserLoginFail = "Đăng nhập không thành công";
+        public const string UserEmailUsed = "Email đã có người dùng";
 
     }
     public static class MasterListGroupCode

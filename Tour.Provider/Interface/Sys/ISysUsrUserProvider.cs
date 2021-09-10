@@ -72,5 +72,12 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         bool IsEmailUsed(SysUsrUserModel model);
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: xóa người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool DeleteSysUsrUser(SysUsrUserModel model);
     }
 }

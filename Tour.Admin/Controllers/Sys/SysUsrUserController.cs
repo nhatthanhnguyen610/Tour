@@ -220,10 +220,10 @@ namespace Tour.Admin.Controllers
                     return Json(new
                     {
                         IsSuccess = false,
-                        Message = "Email đã có người dùng"
+                        Message = ResultStatus.UserEmailUsed
                     });
                 }
-                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.address) && !string.IsNullOrWhiteSpace(model.password))
+                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.password))
                 {
                     var submitResult = _sysUsrUserService.InsertSysUser(model);
                     return Json(new
@@ -308,10 +308,10 @@ namespace Tour.Admin.Controllers
                     return Json(new
                     {
                         IsSuccess = false,
-                        Message = "Email đã có người dùng"
+                        Message = ResultStatus.UserEmailUsed
                     });
                 }
-                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.address) && !string.IsNullOrWhiteSpace(model.password))
+                if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.password))
                 {
                     var submitResult = _sysUsrUserService.InsertSysUser(model);
                     return Json(new
@@ -375,6 +375,26 @@ namespace Tour.Admin.Controllers
             {
                 IsSuccess = result,
                 Message = result ? ResultStatus.SUCCESS : (!result ? ResultStatus.FAIL : ResultStatus.UserOldPass)
+            });
+        }
+        /// <summary>
+        /// DeleteSysUsrUser
+        /// </summary>
+        /// <param name="pUserID"></param>
+        /// <param name="pRowVersion"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult Delete(decimal pUserID)
+        {
+            SysUsrUserModel model = new SysUsrUserModel()
+            {
+                userID = pUserID,
+            };
+            var submitResult = _sysUsrUserService.DeleteSysUsrUser(model);
+            return Json(new
+            {
+                IsSuccess = submitResult,
+                Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
             });
         }
     }

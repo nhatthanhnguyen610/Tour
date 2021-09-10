@@ -107,5 +107,15 @@ namespace Tour.Service
         {
             return _sysUsrUserProvider.IsEmailUsed(model);
         }
+        /// <summary>
+        /// CreateBy: thanhnn
+        /// Description: Xóa người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool DeleteSysUsrUser(SysUsrUserModel model)
+        {
+            return _sysUsrUserProvider.DeleteSysUsrUser(model);
+        }
     }
 }
