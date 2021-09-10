@@ -17,6 +17,16 @@ namespace Tour.Service
         }
         /// <summary>
         /// CreateBy: dtr
+        /// Description: Xóa menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool DeleteSysUsrMenu(SysMenuUserModel model)
+        {
+            return _sysMenuProvider.DeleteSysUsrMenu(model);
+        }
+        /// <summary>
+        /// CreateBy: dtr
         /// Description: Lấy thông tin menu
         /// </summary>
         /// <param name="model"></param>

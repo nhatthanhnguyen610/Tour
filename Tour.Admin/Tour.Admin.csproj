@@ -18,6 +18,10 @@
   </ItemGroup>
 	
  <ItemGroup>
+   <Compile Remove="Controllers\Sys\SysNews.cs" />
+ </ItemGroup>
+	
+ <ItemGroup>
    <Content Remove="Views\SysMenu\_MenuCreate.cshtml" />
  </ItemGroup>
 

@@ -5,51 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using Tour.Base;
 
-namespace Tour.Service
+namespace Tour.Provider
 {
-    public interface ISysMenuService
+    public interface ISysNewsProvider
     {
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy danh sách quyền menu của người dùng
+        /// Description: Lấy danh sách bài viết
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        List<SysMenuUserModel> GetListMenuSysUsr(SysUsrUserFilterModel model);
+        List<SysNewsModel> GetList(SysUsrUserFilterModel model);
         /// <summary>
         /// CreateBy: dtr
-        /// Description: kiểm tra MenuTitle trùng
+        /// Description: Thêm bài viết
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool IsMenuTitlelUsed(SysMenuUserModel model);
+        bool InsertSysNews(SysNewsModel model);
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Thêm Menu mới
+        /// Description: Lấy thông tin bài viết
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool InsertSysMenu(SysMenuUserModel model);
+        SysNewsModel GetInfo(decimal newsId);
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy thông tin menu
+        /// Description: Cập nhật bài viết
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        SysMenuUserModel GetInfoSysUsrMenu(decimal menuID);
+        bool UpdateSysNews(SysNewsModel model);
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Cập nhật menu
+        /// Description: Xóa bài viết
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool UpdateSysUsrMenu(SysMenuUserModel model);
-        /// <summary>
-        /// CreateBy: dtr
-        /// Description: Xóa menu
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        bool DeleteSysUsrMenu(SysMenuUserModel model);
+        bool DeleteSysNews(SysNewsModel model);
     }
 }

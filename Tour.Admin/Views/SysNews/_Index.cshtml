@@ -1,6 +1,6 @@
 ﻿.@using Microsoft.AspNetCore.Routing
 @using Tour.Admin
-@model Tour.Admin.Models.SysMenuUserVM
+@model Tour.Admin.Models.SysNewsVM
 <!-- /.card-header -->
 <div class="card-body">
     <div class="table-responsive" style="grid-auto-columns:auto">
@@ -8,59 +8,49 @@
             <thead class="thead-light">
                 <tr>
                     <th>TT</th>
-                    <th>Mã</th>
-                    <th>Tên Menu</th>
-                    <th>Menu Cha</th>
-                    <th>Action</th>
-                    <th>Controller</th>
+                    <th>Tiêu đề</th>
+                    <th>Mô tả</th>
+                    <th>Danh mục</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @if (Model.ListMenuUser != null && Model.ListMenuUser.Count > 0)
+                @if (Model.ListNews != null && Model.ListNews.Count > 0)
                 {
                     var stt = 0;
-                    foreach (var item in Model.ListMenuUser)
+                    foreach (var item in Model.ListNews)
                     {
                         stt += 1;
                         <tr>
                             <td>@stt</td>
                             <!--Col 1-->
-                            <td>
-                                @item.menuCode
+                            <td style="width:25%">
+                                @item.title
                             </td>
-                             <!-- col 2-->
+                            <!-- col 2-->
                             <td>
-                                 @item.menuTitleCde
+                                @item.description
                             </td>
                             <!-- col 3-->
-                            <td>
-                                 @item.parentMenuCde
+                            <td style="width:13%">
+                                @item.category
                             </td>
                             <!-- col 4-->
-                            <td>
-                                 @item.actionOrClass
-                            </td>
-                            <!-- col 5-->
-                            <td>
-                                @item.controller
-                            </td>
-                            <!-- col 6-->
-                            <td class="text-center">
+                            <td class="text-center" style="width:18%">
                                 <button type="button"
                                         class="btn btn-radius-left btn-info br2 btn-xs fs12 m1 btn-popup-size"
                                         data-toggle="modalMenu"
                                         data-target="#RoleModalAction"
                                         data-width="1000"
                                         data-height="600"
-                                        data-url="@Url.Action("_Update", "SysMenu",new {  menuID = item.id })">
+                                        data-url="@Url.Action("_Update", "SysNews",new {  newsID = item.newsId })">
                                     <span class='fa fa-edit'></span>Cập nhật
                                 </button>
 
                                 <a href="javascript:void(0);"
                                    data-message-confirm="Bạn có chắc muốn xóa"
-                                   action="@Url.Action("_Delete", "SysMenu",new { menuID = item.id })"
-                                   data-id="@item.id"
+                                   action="@Url.Action("_Delete", "SysNews",new { newsID = item.newsId })"
+                                   data-id="@item.newsId"
                                    class="btn btn-sm btn-danger btn-radius-right btn-delete btnDelete">
                                     <span class="fa fa-trash"></span>Xóa
                                 </a><br />
@@ -75,9 +65,9 @@
 </div>
 <!-- /.card-body -->
 <div class="card-footer clearfix">
-    @if (Model.ListMenuUser != null && Model.ListMenuUser.Count > 0)
+    @if (Model.ListNews != null && Model.ListNews.Count > 0)
     {
-        @HtmlPageHelper.Paging(this.Url, @Model.ListMenuUser[0].totalRows, "_Index", "SysMenu", "divListDetail",
+        @HtmlPageHelper.Paging(this.Url, @Model.ListNews[0].totalRows, "_Index", "SysNews", "divListDetail",
         new RouteValueDictionary() {
             { "p", Model.p },
             { "keyWord",Model.keyWord}

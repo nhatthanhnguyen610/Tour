@@ -20,15 +20,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Menu code<span style="color:red">*</span></label>
-                                    @Html.TextBoxFor(m => m.menuCode, new { @class = "form-control", @placeholder = "Menu Code" })
+                                    <label>Mã<span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.menuCode, new { @class = "form-control", @placeholder = "Mã" })
                                     @Html.ValidationMessageFor(m => m.menuCode)
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Menu parent</label>
-                                    @Html.TextBoxFor(m => m.parentMenuCde, new { @class = "form-control", @placeholder = "Meunu Parent" })
+                                    <label>Menu Cha</label>
+                                    @Html.TextBoxFor(m => m.parentMenuCde, new { @class = "form-control", @placeholder = "Meunu Cha" })
                                 </div>
                             </div>
                         </div>
@@ -41,8 +41,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Menu title<span style="color:red">*</span></label>
-                                    @Html.TextBoxFor(m => m.menuTitleCde, new { @class = "form-control", @placeholder = "Menu Title" })
+                                    <label>Tên Menu</label>
+                                    @Html.TextBoxFor(m => m.menuTitleCde, new { @class = "form-control", @placeholder = "Tên Menu" })
+                                    @Html.ValidationMessageFor(m => m.menuTitleCde)
                                 </div>
                             </div>
                         </div>
@@ -51,14 +52,12 @@
                                 <div class="form-group">
                                     <label>Controller<span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.controller, new { @class = "form-control", @placeholder = "Controller" })
-                                    @Html.ValidationMessageFor(m => m.controller)
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Action<span style="color:red">*</span></label>
-                                    @Html.TextBoxFor(m => m.actionOrClass, new { @class = "form-control", @placeholder = "Action Or Class" })
-                                    @Html.ValidationMessageFor(m => m.actionOrClass)
+                                    <label>Action</label>
+                                    @Html.TextBoxFor(m => m.actionOrClass, new { @class = "form-control", @placeholder = "Action" })
                                 </div>
                             </div>
                         </div>
@@ -78,17 +77,13 @@
             "menuCode": {
                 required: true
             },
-            "actionOrClass": {
-                required: true
-            },
-            "controller": {
+            "menuTitleCde": {
                 required: true
             },
         },
         messages: {
             "menuCode": "Vui lòng không để trống",
-            "actionOrClass": "Vui lòng không để trống",
-            "controller": "Vui lòng không để trống",
+            "menuTitleCde": "Vui lòng không để trống",
         },
         errorPlacement: function (error, element) {
             error.addClass('error-valid');

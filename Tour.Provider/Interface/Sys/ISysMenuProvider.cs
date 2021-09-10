@@ -44,6 +44,12 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         bool UpdateSysUsrMenu(SysMenuUserModel model);
-
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Xóa menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool DeleteSysUsrMenu(SysMenuUserModel model);
     }
 }

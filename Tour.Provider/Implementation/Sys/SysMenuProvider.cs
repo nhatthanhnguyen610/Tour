@@ -132,5 +132,24 @@ namespace Tour.Provider
             }
             return false;
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Xóa menu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool DeleteSysUsrMenu(SysMenuUserModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.id
+            };
+            var result = base.ExeScalar("sp_SysUsrMenu_Delete_V01", paramObj);
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
