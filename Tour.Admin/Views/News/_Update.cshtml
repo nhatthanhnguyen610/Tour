@@ -1,0 +1,71 @@
+﻿@model Tour.Admin.Models.NewsViewModel
+@{
+    Layout = null;
+}
+<style>
+    .error-valid {
+        color: red;
+    }
+</style>
+<div id="MenuModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("_Update", "News", FormMethod.Post, new { id = "frmUpdate" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.newsId)
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Tiêu đề<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.title, new { @class = "form-control", @placeholder = "Tiêu đề" })
+                                @Html.ValidationMessageFor(m => m.title)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                @Html.TextBoxFor(m => m.description, new { @class = "form-control", @placeholder = "Mô tả" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Danh mục</label>
+                                @Html.TextBoxFor(m => m.category, new { @class = "form-control", @placeholder = "Danh mục" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnUpdate" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                        <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $('#frmUpdate').validate({
+        rules: {
+            "title": {
+                required: true
+            },
+        },
+        messages: {
+            "title": "Vui lòng không để trống",
+        },
+        errorPlacement: function (error, element) {
+            error.addClass('error-valid');
+            error.insertAfter(element);
+            if (element.attr("name") == "") {
+                error.insertAfter("#");
+            }
+        }
+    })
+</script>
