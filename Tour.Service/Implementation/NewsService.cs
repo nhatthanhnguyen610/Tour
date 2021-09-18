@@ -10,10 +10,10 @@ namespace Tour.Service
 {
     public class NewsService : INewsService
     {
-        INewsProvider _sysNewsProvider;
+        INewsProvider _NewsProvider;
         public NewsService(string appId, string userId = "0")
         {
-            _sysNewsProvider = new NewsProvider(appId, userId);
+            _NewsProvider = new NewsProvider(appId, userId);
         }
         /// <summary>
         /// CreateBy: dtr
@@ -23,7 +23,7 @@ namespace Tour.Service
         /// <returns></returns>
         public List<NewsModel> GetList(SysUsrUserFilterModel model)
         {
-            return _sysNewsProvider.GetList(model);
+            return _NewsProvider.GetList(model);
         }
         /// <summary>
         /// CreateBy: dtr
@@ -33,7 +33,7 @@ namespace Tour.Service
         /// <returns></returns>
         public bool InsertSysNews(NewsModel model)
         {
-            return _sysNewsProvider.InsertSysNews(model);
+            return _NewsProvider.InsertSysNews(model);
         }
         /// <summary>
         /// CreateBy: dtr
@@ -43,7 +43,7 @@ namespace Tour.Service
         /// <returns></returns>
         public NewsModel GetInfo(decimal newsId)
         {
-            return _sysNewsProvider.GetInfo(newsId);
+            return _NewsProvider.GetInfo(newsId);
         }
         /// <summary>
         /// CreateBy: dtr
@@ -53,7 +53,7 @@ namespace Tour.Service
         /// <returns></returns>
         public bool UpdateSysNews(NewsModel model)
         {
-            return _sysNewsProvider.UpdateSysNews(model);
+            return _NewsProvider.UpdateSysNews(model);
         }
         /// <summary>
         /// CreateBy: dtr
@@ -63,7 +63,7 @@ namespace Tour.Service
         /// <returns></returns>
         public bool DeleteSysNews(NewsModel model)
         {
-            return _sysNewsProvider.DeleteSysNews(model);
+            return _NewsProvider.DeleteSysNews(model);
         }
     }
 }

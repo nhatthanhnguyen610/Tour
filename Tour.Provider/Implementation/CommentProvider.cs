@@ -10,51 +10,67 @@ using static Tour.Provider.Connection.ConnectString;
 
 namespace Tour.Provider
 {
-    public class NewsProvider : ConnectSqlExecute, INewsProvider
+    public class CommentProvider : ConnectSqlExecute, ICommentProvider
     {
-        public NewsProvider(string appId, string userId)
+        public CommentProvider(string appId, string userId)
            : base(ConnectCode.DBConnection, appId, userId)
         {
 
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy danh sách bài viết
+        /// Description: Lấy danh sách comment
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<NewsModel> GetList(SysUsrUserFilterModel model)
+        public List<CommentModel> GetList(SysUsrUserFilterModel model)
         {
             var paramObj = new object[]
-            {
+           {
 
                 model.keyWord,
                 model.pageIndex,
                 model.pageSize
-            };
-            var resultMenu = base.ExecProcedure<NewsModel>("sp_News_GetList_V01", paramObj);
-            if (resultMenu.Any())
+           };
+            var resultComment = base.ExecProcedure<CommentModel>("sp_Comment_GetList_V01", paramObj);
+            if (resultComment.Any())
             {
-                return resultMenu.ToList();
+                return resultComment.ToList();
             }
             return null;
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Thêm bài viết
+        /// Description: Lấy danh sách bài viết từ comment
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool InsertSysNews(NewsModel model)
+        public List<NewsModel> GetListNews()
+        {
+            var resultComment = base.ExecProcedure<NewsModel>("sp_Comment_GetListNews_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
+        }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Thêm comment
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool InsertComment(CommentModel model)
         {
             var paramObj = new object[]
             {
-                model.title,
-                model.description,
-                model.category,
+                model.email,
+                model.content,
+                model.rate,
+                model.newsId,
                 model.createdBy
             };
-            var result = base.ExeScalar("sp_News_Insert_V01", paramObj);
+            var result = base.ExeScalar("sp_Comment_Insert_V01", paramObj);
             if (result != null && result.ToString().Equals("1"))
             {
                 return true;
@@ -63,40 +79,41 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy thông tin bài viết
+        /// Description: Lấy thông tin comment
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public NewsModel GetInfo(decimal newsId)
+        public CommentModel GetInfo(decimal Id)
         {
             var paramObj = new object[]
             {
-               newsId
+               Id
             };
-            var result = base.ExecProcedure<NewsModel>("sp_News_GetInfo_V01", paramObj);
+            var result = base.ExecProcedure<CommentModel>("sp_Comment_GetInfo_V01", paramObj);
             if (result.Any())
             {
                 return result.FirstOrDefault();
             }
-            return new NewsModel();
+            return new CommentModel();
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Cập nhật bài viết
+        /// Description: Cập nhật comment
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateSysNews(NewsModel model)
+        public bool UpdateComment(CommentModel model)
         {
             var paramObj = new object[]
             {
+                model.id,
+                model.email,
+                model.content,
+                model.rate,
                 model.newsId,
-                model.title,
-                model.description,
-                model.category,
                 model.createdBy
             };
-            var result = base.ExeScalar("sp_News_Update_V01", paramObj);
+            var result = base.ExeScalar("sp_Comment_Update_V01", paramObj);
             if (result != null && result.ToString().Equals(ResultCode.Success))
             {
                 return true;
@@ -105,17 +122,17 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Xóa bài viết
+        /// Description: Xóa comment
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool DeleteSysNews(NewsModel model)
+        public bool DeleteComment(CommentModel model)
         {
             var paramObj = new object[]
-            {
-                model.newsId
-            };
-            var result = base.ExeScalar("sp_News_Delete_V01", paramObj);
+           {
+                model.id
+           };
+            var result = base.ExeScalar("sp_Comment_Delete_V01", paramObj);
             if (result != null)
             {
                 return true;
