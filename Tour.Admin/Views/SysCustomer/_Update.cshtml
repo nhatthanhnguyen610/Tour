@@ -1,4 +1,4 @@
-﻿@model Tour.Admin.Models.SysUsrUserViewModel
+﻿@model Tour.Admin.Models.SysCustomerViewModel
 @{
     Layout = null;
 }
@@ -10,11 +10,11 @@
 <div id="RoleModalAction" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            @using (Html.BeginForm("_Create", "SysUsrUser", FormMethod.Post, new { id = "frmCreate" }))
+            @using (Html.BeginForm("_Update", "SysCustomer", FormMethod.Post, new { id = "frmUpdate" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @Html.HiddenFor(m => m.userID)
+                @Html.HiddenFor(m => m.Id)
                 <div class="card-body">
                     <div class="row section">
                         <div class="col-md-8">
@@ -32,17 +32,17 @@
                                     <div class="form-group">
                                         <label>Ngày sinh</label>
                                         <div class="input-group">
-                                            @Html.TextBoxFor(m => m.birthdayView, "{0:dd/MM/yyyy}", new { @class = "form-control show-datepicker", @placeholder = "Ngày sinh" })
+                                            @Html.TextBoxFor(m => m.birthday, "{0:dd/MM/yyyy}", new { @class = "form-control show-datepicker", @placeholder = "Ngày sinh" })
                                             <div class="input-group-append">
                                                 <span class="input-group-text" style="background-color: #fff;border-radius: 0 .25rem .25rem 0;"><i class="fa fa-calendar"></i></span>
                                             </div>
-                                            @Html.ValidationMessageFor(m => m.birthdayView)
+                                            @Html.ValidationMessageFor(m => m.birthday)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Số điện thoại<span style="color:red">*</span></label>
+                                        <label>Số điện thoại</label>
                                         @Html.TextBoxFor(m => m.phone, new { @class = "form-control", @placeholder = "Số điện thoại" })
                                         @Html.ValidationMessageFor(m => m.phone)
                                     </div>
@@ -79,20 +79,18 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tên đăng nhập<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Tên đăng nhập" })
+                                @Html.ValidationMessageFor(m => m.username)
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Mật khẩu<span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.password, new { @class = "form-control", @type = "password", @placeholder = "Mật khẩu" })
                                 @Html.ValidationMessageFor(m => m.password)
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label></label>
-                            <div class="icheck-primary" style="margin-left:25px;padding-top:8px">
-                                @Html.CheckBoxFor(m => m.isActive, new { @name = "isActive", @id = "isActive" })
-                                <label for="isActive">
-                                    Kích hoạt
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -104,10 +102,11 @@
                                 @Html.ValidationMessageFor(m => m.address)
                             </div>
                         </div>
+
                     </div>
                     <input type="hidden" class="gui-input" hidden="hidden" id="uploader" value="@Model.avatar" placeholder="Please Select A File">
                     <div class="modal-footer">
-                        <button type="button" id="btnSubmit" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                        <button type="button" id="btnUpdate" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
                         <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
                     </div>
                 </div>
@@ -116,7 +115,7 @@
     </div>
 </div>
 <script language="javascript">
-    $('#frmCreate').validate({
+    $('#frmUpdate').validate({
         rules: {
             "fullName": {
                 required: true
@@ -127,11 +126,15 @@
             "password": {
                 required: true
             },
+            "username": {
+                required: true
+            },
         },
         messages: {
             "fullName": "Vui lòng không để trống",
             "email": "Vui lòng không để trống",
             "password": "Vui lòng không để trống",
+            "username": "Vui lòng không để trống",
         },
         errorPlacement: function (error, element) {
             error.addClass('error-valid');

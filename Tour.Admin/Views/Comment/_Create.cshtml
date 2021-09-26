@@ -49,7 +49,8 @@
                                 <label>Rate</label>
                                 @Html.TextBoxFor(m => m.rate, new { @class = "form-control", @placeholder = "Rate" })
                                 @*<input type="range" class="custom-range" min="0" max="5" step="0.5" onChange="Value(this.value)">
-                                <a id="rValue"></a>*@
+                                <a id="rValue"></a>
+                                @Html.HiddenFor(m => m.rate)*@
                             </div>
                         </div>
                     </div>
@@ -89,8 +90,9 @@
         }
     })
 
-    //function Value(rateV) {
-    //    document.getElementById("rValue").innerHTML = rateV;
-    //    document.getElementById("rate").innerHTML = rateV;
+    //function Value(ratev) {
+    //    document.getElementById("rValue").innerHTML = ratev;
+    //    var convert = String(ratev);
+    //    document.getElementById("rate").innerHTML = convert;
     //}
 </script>
