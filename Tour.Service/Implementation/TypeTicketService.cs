@@ -65,5 +65,15 @@ namespace Tour.Service
         {
             return _TypeTicketProvider.DeleteTypeTicket(model);
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListFlight()
+        {
+            return _TypeTicketProvider.GetListFlight();
+        }
     }
 }

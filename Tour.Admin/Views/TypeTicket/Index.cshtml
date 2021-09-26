@@ -1,4 +1,4 @@
-﻿@model Tour.Admin.Models.SysCustomerVM
+﻿@model Tour.Admin.Models.TypeTicketVM
 @using Tour.Admin
 
 <!-- Content Header (Page header) -->
@@ -15,7 +15,7 @@
                         data-target="#MenuModal"
                         data-width="1000"
                         data-height="600"
-                        data-url="@Url.Action("_Create", "SysCustomer")">
+                        data-url="@Url.Action("_Create", "TypeTicket")">
                     <span class='fa fa-plus fa-fw'></span>Thêm mới
                 </button>
             </div>
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-footer clearfix">
-                        @using (Html.BeginForm("_Index", "SysCustomer", FormMethod.Get, new { @class = "form-sm form-load-ajax", id = "frmSysCustomer", data_load_view = "divListDetail" }))
+                        @using (Html.BeginForm("_Index", "TypeTicket", FormMethod.Get, new { @class = "form-sm form-load-ajax", id = "frmTypeTicket", data_load_view = "divListDetail" }))
                         {
                             <div class="row m-0">
                                 <div class="col-md-8">
@@ -65,7 +65,7 @@
 </section>
 <!-- /.content -->
 @section Scripts{
-    <script src="~/assets/js/syscustomer.js"></script>
+    <script src="~/assets/js/typeticket.js"></script>
     <script>
         var RoleCreateURL = $('#menuModalPlace');
         $(function () {

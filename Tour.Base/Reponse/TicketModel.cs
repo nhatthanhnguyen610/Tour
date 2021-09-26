@@ -12,6 +12,7 @@ namespace Tour.Base
         public int userId { get; set; }
         public int flightId { get; set; }
         public int TTicketId { get; set; }
+        public int TTicketIdChange { get; set; }
         public int totalRows { get; set; }
         public int totalPages { get; set; }
     }

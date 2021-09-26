@@ -124,5 +124,20 @@ namespace Tour.Provider
             }
             return false;
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListFlight()
+        {
+            var resultComment = base.ExecProcedure<FlightModel>("sp_TypeTicket_GetListFlight_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
+        }
     }
 }
