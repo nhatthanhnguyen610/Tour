@@ -1,0 +1,76 @@
+﻿.@using Microsoft.AspNetCore.Routing
+@using Tour.Admin
+@model Tour.Admin.Models.NewsVM
+<!-- /.card-header -->
+<div class="card-body">
+    <div class="table-responsive" style="grid-auto-columns:auto">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>TT</th>
+                    <th>Tiêu đề</th>
+                    <th>Mô tả</th>
+                    <th>Danh mục</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListNews != null && Model.ListNews.Count > 0)
+                {
+                    var stt = 0;
+                    foreach (var item in Model.ListNews)
+                    {
+                        stt += 1;
+                        <tr>
+                            <td>@stt</td>
+                            <!--Col 1-->
+                            <td style="width:25%">
+                                @item.title
+                            </td>
+                            <!-- col 2-->
+                            <td>
+                                @item.description
+                            </td>
+                            <!-- col 3-->
+                            <td style="width:13%">
+                                @item.category
+                            </td>
+                            <!-- col 4-->
+                            <td class="text-center" style="width:18%">
+                                <button type="button"
+                                        class="btn btn-radius-left btn-info br2 btn-xs fs12 m1 btn-popup-size"
+                                        data-toggle="modalMenu"
+                                        data-target="#RoleModalAction"
+                                        data-width="1000"
+                                        data-height="600"
+                                        data-url="@Url.Action("_Update", "News",new {  newsID = item.newsId })">
+                                    <span class='fa fa-edit'></span>Cập nhật
+                                </button>
+
+                                <a href="javascript:void(0);"
+                                   data-message-confirm="Bạn có chắc muốn xóa"
+                                   action="@Url.Action("_Delete", "News",new { newsID = item.newsId })"
+                                   data-id="@item.newsId"
+                                   class="btn btn-sm btn-danger btn-radius-right btn-delete btnDelete">
+                                    <span class="fa fa-trash"></span>Xóa
+                                </a><br />
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.card-body -->
+<div class="card-footer clearfix">
+    @if (Model.ListNews != null && Model.ListNews.Count > 0)
+    {
+        @HtmlPageHelper.Paging(this.Url, @Model.ListNews[0].totalRows, "_Index", "News", "divListDetail",
+        new RouteValueDictionary() {
+            { "p", Model.p },
+            { "keyWord",Model.keyWord}
+         })
+    }
+</div>

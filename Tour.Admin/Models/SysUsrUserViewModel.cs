@@ -34,6 +34,7 @@ namespace Tour.Admin.Models
         [Required]
         [Display(Name = "Nhập lại mật khẩu")]
         public string passwordConfirm { get; set; }
+        public string errorMessage { get; set; }
     }
     public class SysUsrUserVM
     {

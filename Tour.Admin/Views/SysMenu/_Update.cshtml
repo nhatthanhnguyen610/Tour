@@ -1,0 +1,96 @@
+﻿@model Tour.Admin.Models.SysMenuUserViewModel
+@{
+    Layout = null;
+}
+<style>
+    .error-valid {
+        color: red;
+    }
+</style>
+<div id="RoleModalAction" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("_Update", "SysMenu", FormMethod.Post, new { id = "frmUpdate" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.id)
+                <div class="card-body">
+                    <div class="row section">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Mã<span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.menuCode, new { @class = "form-control", @placeholder = "Mã" })
+                                    @Html.ValidationMessageFor(m => m.menuCode)
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Menu Cha</label>
+                                    @Html.TextBoxFor(m => m.parentMenuCde, new { @class = "form-control", @placeholder = "Meunu Cha" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Menu icon<span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.menuIcon, new { @class = "form-control", @placeholder = "Menu Icon" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tên Menu</label>
+                                    @Html.TextBoxFor(m => m.menuTitleCde, new { @class = "form-control", @placeholder = "Tên Menu" })
+                                    @Html.ValidationMessageFor(m => m.menuTitleCde)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Controller<span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.controller, new { @class = "form-control", @placeholder = "Controller" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Action</label>
+                                    @Html.TextBoxFor(m => m.actionOrClass, new { @class = "form-control", @placeholder = "Action" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnUpdate" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                        <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $('#frmUpdate').validate({
+        rules: {
+            "menuCode": {
+                required: true
+            },
+            "menuTitleCde": {
+                required: true
+            },
+        },
+        messages: {
+            "menuCode": "Vui lòng không để trống",
+            "menuTitleCde": "Vui lòng không để trống",
+        },
+        errorPlacement: function (error, element) {
+            error.addClass('error-valid');
+            error.insertAfter(element);
+            if (element.attr("name") == "") {
+                error.insertAfter("#");
+            }
+        }
+    })
+</script>

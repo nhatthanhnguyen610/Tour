@@ -7,11 +7,20 @@
   </PropertyGroup>
 	
  <ItemGroup>
+    <Compile Remove="Models\NewFolder\**" />
     <Compile Remove="se\**" />
+    <Content Remove="Models\NewFolder\**" />
     <Content Remove="se\**" />
+    <EmbeddedResource Remove="Models\NewFolder\**" />
     <EmbeddedResource Remove="se\**" />
+    <None Remove="Models\NewFolder\**" />
     <None Remove="se\**" />
   </ItemGroup>
+	
+ <ItemGroup>
+   <Content Remove="Views\SysMenu\_MenuCreate.cshtml" />
+   <Content Remove="wwwroot\assets\css\rate.css" />
+ </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Tour.Common\Tour.Common.csproj" />
@@ -19,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\assets\css\" />
     <Folder Include="wwwroot\assets\image\" />
-    <Folder Include="wwwroot\assets\js\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
