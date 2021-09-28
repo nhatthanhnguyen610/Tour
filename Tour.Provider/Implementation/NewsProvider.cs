@@ -70,9 +70,9 @@ namespace Tour.Provider
         public NewsModel GetInfo(decimal newsId)
         {
             var paramObj = new object[]
-            {
+           {
                newsId
-            };
+           };
             var result = base.ExecProcedure<NewsModel>("sp_News_GetInfo_V01", paramObj);
             if (result.Any())
             {

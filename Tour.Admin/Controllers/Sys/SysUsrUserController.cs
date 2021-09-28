@@ -51,7 +51,7 @@ namespace Tour.Admin.Controllers
                 var viewModel = vm.ConvertObject<SysUsrUserVM, SysUsrUserFilterModel>();
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
-                vm.ListUser = _sysUsrUserService.GetListSysUsrUser(viewModel);
+                vm.ListUser = _sysUsrUserService.GetListSysUsrUser(viewModel);          
             }
             catch (Exception ex)
             {
@@ -89,7 +89,7 @@ namespace Tour.Admin.Controllers
                     return View(new LoginViewModel()
                     {
                         errorMessage = ResultStatus.UserLoginNull
-                    });
+                    }) ;
                 }
                 var infoMemer = _sysUsrUserService.LoginSys(
                     new LoginRequestModel()
@@ -133,7 +133,7 @@ namespace Tour.Admin.Controllers
             {
                 throw ex;
             }
-            return PartialView("_Role", vm);
+            return PartialView("_Role",vm);
         }
         /// <summary>
         ///  Author: thanhnn

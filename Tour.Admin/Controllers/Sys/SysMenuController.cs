@@ -112,7 +112,7 @@ namespace Tour.Admin.Controllers
                         Message = ResultStatus.FAIL
                     });
                 }
-            }
+            } 
             catch (Exception ex)
             {
                 return Json(new
@@ -214,5 +214,5 @@ namespace Tour.Admin.Controllers
                 Message = submitResult ? ResultStatus.SUCCESS : ResultStatus.FAIL
             });
         }
-    }
+    }   
 }
