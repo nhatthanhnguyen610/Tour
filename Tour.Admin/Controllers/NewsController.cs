@@ -115,7 +115,7 @@ namespace Tour.Admin.Controllers
 
         }
 
-         /// <summary>
+        /// <summary>
         ///  Author: dtr
         ///  Description: cập nhật
         /// </summary>

@@ -6,29 +6,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tour.Admin.Models;
 using Tour.Base;
-using Tour.Service;
 using Tour.Common.Constants;
+using Tour.Service;
 
 namespace Tour.Admin.Controllers
 {
-    public class SysMenuController : BaseController
+    public class TicketController : BaseController
     {
-        ISysMenuService _sysMenuService;
-        public SysMenuController()
+        ITicketService _TicketService;
+        public TicketController()
         {
-            _sysMenuService = new SysMenuService(string.Empty);
+            _TicketService = new TicketService(string.Empty);
         }
         public IActionResult Index()
         {
-            var vm = new SysMenuUserVM();
+            var vm = new TicketVM();
             try
             {
                 var model = new SysUsrUserFilterModel();
                 vm.p = vm.p == 0 ? 1 : vm.p;
                 model.pageIndex = vm.p;
                 model.pageSize = DefinedConstants.RowPerPage;
-                var _listUser = _sysMenuService.GetListMenuSysUsr(model);
-                vm.ListMenuUser = _listUser;
+                var _listTicket = _TicketService.GetList(model);
+                vm.ListTicket = _listTicket;
+                var _listFlight = _TicketService.GetListFlight();
+                vm.ListFlight = _listFlight;
+                var _listCustomer = _TicketService.GetListCustomer();
+                vm.ListCustomer = _listCustomer;
+                var _listTTicket = _TicketService.GetListTypeTicket();
+                vm.ListTTicket = _listTTicket;
             }
             catch (Exception ex)
             {
@@ -42,15 +48,18 @@ namespace Tour.Admin.Controllers
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public PartialViewResult _Index(SysMenuUserVM vm)
+        public PartialViewResult _Index(TicketVM vm)
         {
             try
             {
                 ViewBag.Paging = vm.p;
-                var viewModel = vm.ConvertObject<SysMenuUserVM, SysUsrUserFilterModel>();
+                var viewModel = vm.ConvertObject<TicketVM, SysUsrUserFilterModel>();
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
-                vm.ListMenuUser = _sysMenuService.GetListMenuSysUsr(viewModel);
+                vm.ListTicket = _TicketService.GetList(viewModel);
+                vm.ListFlight = _TicketService.GetListFlight();
+                vm.ListCustomer = _TicketService.GetListCustomer();
+                vm.ListTTicket = _TicketService.GetListTypeTicket();
 
             }
             catch (Exception ex)
@@ -62,42 +71,38 @@ namespace Tour.Admin.Controllers
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description: Đặt vé
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         public IActionResult _Create()
         {
-            return View(new SysMenuUserViewModel());
+            ViewBag.listFlight = _TicketService.GetListFlight();
+            ViewBag.listCustomer = _TicketService.GetListCustomer();
+            ViewBag.listTTicket = _TicketService.GetListTypeTicket();
+            return View(new TicketViewModel());
         }
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description: Đặt vé
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Create(SysMenuUserViewModel vm)
+        public ActionResult _Create(TicketViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<TicketViewModel, TicketModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuTitleCde))
+                if (!string.IsNullOrWhiteSpace(model.userId.ToString()) && !string.IsNullOrWhiteSpace(model.flightId.ToString()) 
+                    && !string.IsNullOrWhiteSpace(model.TTicketId.ToString()))
                 {
-                    var submitResult = _sysMenuService.InsertSysMenu(model);
+                    model.TTicketIdChange = model.TTicketId;
+                    var submitResult = _TicketService.InsertTicket(model) && _TicketService.ReduceStock(model.TTicketId);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -123,19 +128,23 @@ namespace Tour.Admin.Controllers
             }
 
         }
+
         /// <summary>
         ///  Author: dtr
-        ///  Description: cập nhật
+        ///  Description: Chỉnh sửa vé
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        public IActionResult _Update(decimal menuID)
+        public IActionResult _Update(decimal ticketID)
         {
-            var vm = new SysMenuUserViewModel();
+            var vm = new TicketViewModel();
             try
             {
-                var _lstMenu = _sysMenuService.GetInfoSysUsrMenu(menuID);
-                vm = _lstMenu.ConvertObject<SysMenuUserModel, SysMenuUserViewModel>();
+                var _lstTicket = _TicketService.GetInfo(ticketID);
+                vm = _lstTicket.ConvertObject<TicketModel, TicketViewModel>();
+                ViewBag.listFlight = _TicketService.GetListFlight();
+                ViewBag.listCustomer = _TicketService.GetListCustomer();
+                ViewBag.listTTicket = _TicketService.GetListTypeTicket();
             }
             catch (Exception ex)
             {
@@ -145,31 +154,31 @@ namespace Tour.Admin.Controllers
         }
         /// <summary>
         ///  Author: dtr
-        ///  Description: cập nhật
+        ///  Description: Chỉnh sửa vé
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Update(SysMenuUserViewModel vm)
+        public ActionResult _Update(TicketViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<TicketViewModel, TicketModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.actionOrClass) && !string.IsNullOrWhiteSpace(model.controller))
+                if (!string.IsNullOrWhiteSpace(model.userId.ToString()) && !string.IsNullOrWhiteSpace(model.flightId.ToString())
+                    && !string.IsNullOrWhiteSpace(model.TTicketId.ToString()))
                 {
-                    var submitResult = _sysMenuService.UpdateSysUsrMenu(model);
+                    if (model.TTicketId != model.TTicketIdChange)
+                    {
+                        if (_TicketService.IncreaseStock(model.TTicketIdChange) && _TicketService.ReduceStock(model.TTicketId))
+                        {
+                            model.TTicketIdChange = model.TTicketId;
+                        } 
+                    }
+                    model.TTicketIdChange = model.TTicketId;
+                    var submitResult = _TicketService.UpdateTicket(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -195,19 +204,19 @@ namespace Tour.Admin.Controllers
             }
         }
         /// <summary>
-        /// DeleteSysUsrMenu
+        /// DeleteSysNews
         /// </summary>
-        /// <param name="pmenuID"></param>
+        /// <param name="ticketID"></param>
         /// <param name="pRowVersion"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult DeleteSysMenu(decimal pmenuID)
+        public JsonResult Delete(decimal ticketID)
         {
-            SysMenuUserModel model = new SysMenuUserModel()
+            TicketModel model = new TicketModel()
             {
-                id = pmenuID,
+                Id = ticketID,
             };
-            var submitResult = _sysMenuService.DeleteSysUsrMenu(model);
+            var submitResult = _TicketService.DeleteTicket(model) && _TicketService.IncreaseStock(ticketID);
             return Json(new
             {
                 IsSuccess = submitResult,

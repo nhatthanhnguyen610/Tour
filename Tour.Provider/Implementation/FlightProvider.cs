@@ -10,51 +10,53 @@ using static Tour.Provider.Connection.ConnectString;
 
 namespace Tour.Provider
 {
-    public class NewsProvider : ConnectSqlExecute, INewsProvider
+    public class FlightProvider : ConnectSqlExecute, IFlightProvider
     {
-        public NewsProvider(string appId, string userId)
-           : base(ConnectCode.DBConnection, appId, userId)
+        public FlightProvider(string appId, string userId)
+            : base(ConnectCode.DBConnection, appId, userId)
         {
 
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy danh sách bài viết
+        /// Description: Lấy danh sách chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<NewsModel> GetList(SysUsrUserFilterModel model)
+        public List<FlightModel> GetList(SysUsrUserFilterModel model)
         {
             var paramObj = new object[]
             {
-
                 model.keyWord,
                 model.pageIndex,
                 model.pageSize
             };
-            var resultMenu = base.ExecProcedure<NewsModel>("sp_News_GetList_V01", paramObj);
-            if (resultMenu.Any())
+            var resultComment = base.ExecProcedure<FlightModel>("sp_Flight_GetList_V01", paramObj);
+            if (resultComment.Any())
             {
-                return resultMenu.ToList();
+                return resultComment.ToList();
             }
             return null;
+
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Thêm bài viết
+        /// Description: Thêm chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool InsertSysNews(NewsModel model)
+        public bool InsertFlight(FlightModel model)
         {
             var paramObj = new object[]
             {
-                model.title,
+                model.name,
+                model.image,
                 model.description,
-                model.category,
+                model.date,
+                model.duaration,
                 model.createdBy
             };
-            var result = base.ExeScalar("sp_News_Insert_V01", paramObj);
+            var result = base.ExeScalar("sp_Flight_Insert_V01", paramObj);
             if (result != null && result.ToString().Equals("1"))
             {
                 return true;
@@ -63,40 +65,42 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy thông tin bài viết
+        /// Description: Lấy thông tin chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public NewsModel GetInfo(decimal newsId)
+        public FlightModel GetInfo(decimal Id)
         {
             var paramObj = new object[]
             {
-               newsId
+               Id
             };
-            var result = base.ExecProcedure<NewsModel>("sp_News_GetInfo_V01", paramObj);
+            var result = base.ExecProcedure<FlightModel>("sp_Flight_GetInfo_V01", paramObj);
             if (result.Any())
             {
                 return result.FirstOrDefault();
             }
-            return new NewsModel();
+            return new FlightModel();
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Cập nhật bài viết
+        /// Description: Cập nhật chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateSysNews(NewsModel model)
+        public bool UpdateFlight(FlightModel model)
         {
             var paramObj = new object[]
             {
-                model.newsId,
-                model.title,
+                model.Id,
+                model.name,
+                model.image,
                 model.description,
-                model.category,
+                model.date,
+                model.duaration,
                 model.createdBy
             };
-            var result = base.ExeScalar("sp_News_Update_V01", paramObj);
+            var result = base.ExeScalar("sp_Flight_Update_V01", paramObj);
             if (result != null && result.ToString().Equals(ResultCode.Success))
             {
                 return true;
@@ -105,17 +109,17 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Xóa bài viết
+        /// Description: Xóa chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool DeleteSysNews(NewsModel model)
+        public bool DeleteFlight(FlightModel model)
         {
             var paramObj = new object[]
             {
-                model.newsId
+                model.Id
             };
-            var result = base.ExeScalar("sp_News_Delete_V01", paramObj);
+            var result = base.ExeScalar("sp_Flight_Delete_V01", paramObj);
             if (result != null)
             {
                 return true;

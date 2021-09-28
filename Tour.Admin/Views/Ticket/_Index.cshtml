@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Routing
+@using Tour.Admin
+@model Tour.Admin.Models.TicketVM
+<!-- /.card-header -->
+<div class="card-body">
+    <div class="table-responsive" style="grid-auto-columns:auto">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>TT</th>
+                    <th>Customer</th>
+                    <th>Flight</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListTicket != null && Model.ListTicket.Count > 0)
+                {
+                    var stt = 0;
+                    foreach (var item in Model.ListTicket)
+                    {
+                        var itemFlight = Model.ListFlight.Where(m => m.Id == item.flightId).FirstOrDefault();
+                        var itemCustomer = Model.ListCustomer.Where(m => m.Id == item.userId).FirstOrDefault();
+                        var itemTTicket = Model.ListTTicket.Where(m => m.Id == item.TTicketId).FirstOrDefault();
+                        stt += 1;
+                        <tr>
+                            <td>@stt</td>
+                            <!--Col 1-->
+                            <td>
+                                @item.userId - @itemCustomer.fullName
+                            </td>
+                            <!-- col 2-->
+                            <td>
+                                @itemFlight.name
+                            </td>
+                            <!-- col 3-->
+                            <td>
+                                @itemTTicket.type
+                            </td>
+                            <!-- col 4-->
+                            <td>
+                                @itemTTicket.price
+                            </td>
+                            <!-- col 5-->
+                            <td class="text-center" style="18%">
+                                <button type="button"
+                                        class="btn btn-radius-left btn-info br2 btn-xs fs12 m1 btn-popup-size"
+                                        data-toggle="modalMenu"
+                                        data-target="#RoleModalAction"
+                                        data-width="1000"
+                                        data-height="600"
+                                        data-url="@Url.Action("_Update", "Ticket",new {  ticketID = item.Id })">
+                                    <span class='fa fa-edit'></span>Cập nhật
+                                </button>
+
+                                <a href="javascript:void(0);"
+                                   data-message-confirm="Bạn có chắc muốn xóa"
+                                   action="@Url.Action("_Delete", "Ticket",new { ticketID = item.Id })"
+                                   data-id="@item.Id"
+                                   class="btn btn-sm btn-danger btn-radius-right btn-delete btnDelete">
+                                    <span class="fa fa-trash"></span>Xóa
+                                </a><br />
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.card-body -->
+<div class="card-footer clearfix">
+    @if (Model.ListTicket != null && Model.ListTicket.Count > 0)
+    {
+        @HtmlPageHelper.Paging(this.Url, @Model.ListTicket[0].totalRows, "_Index", "Ticket", "divListDetail",
+        new RouteValueDictionary() {
+            { "p", Model.p },
+            { "keyWord",Model.keyWord}
+         })
+    }
+</div>
+

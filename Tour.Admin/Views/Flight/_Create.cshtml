@@ -1,0 +1,102 @@
+﻿@model Tour.Admin.Models.FlightViewModel
+@{
+    Layout = null;
+}
+<style>
+    .error-valid {
+        color: red;
+    }
+</style>
+<div id="MenuModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("_Create", "Flight", FormMethod.Post, new { id = "frmCreate" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+                <div class="card-body">
+                    <div class="row section">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="fileupload fileupload-new admin-form" data-provides="fileupload">
+                                    <div class="fileupload-preview thumbnail mb5" style="height:167px">
+                                        @Html.Raw("<img style=\"height: 167px; width: 100 %; display: block; \" src=\"" + @Model.image + "\" />")
+                                    </div>
+                                    <span class="btn bg-gradient-secondary btn-file btn-block ph5">
+                                        <span class="fileupload-new">Image</span>
+                                        <span class="fileupload-exists">Image</span>
+                                        <input type="file" name="file" id="file" accept="image/*">
+                                    </span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.image)
+                            <div class="col-md-1"></div>
+                        </div>
+                        <input type="hidden" class="gui-input" hidden="hidden" id="uploader" value="@Model.image" placeholder="Please Select A File">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Name<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.name, new { @class = "form-control", @placeholder = "Name" })
+                                @Html.ValidationMessageFor(m => m.name)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Description</label>
+                                @Html.TextAreaFor(m => m.description, new { @class = "form-control", @placeholder = "Description" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Ngày đi</label>
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.date, "{0:dd/MM/yyyy}", new { @class = "form-control show-datepicker", @placeholder = "Ngày đi" })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="background-color: #fff;border-radius: 0 .25rem .25rem 0;"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Duaration</label>
+                                @Html.TextBoxFor(m => m.duaration, new { @class = "form-control", @placeholder = "Duaration" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSubmit" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                        <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $('#frmCreate').validate({
+        rules: {
+            "name": {
+                required: true
+            },
+        },
+        messages: {
+            "name": "Vui lòng không để trống",
+        },
+        errorPlacement: function (error, element) {
+            error.addClass('error-valid');
+            error.insertAfter(element);
+            if (element.attr("name") == "") {
+                error.insertAfter("#");
+            }
+        }
+    })
+</script>

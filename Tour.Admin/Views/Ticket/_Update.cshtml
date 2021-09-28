@@ -1,0 +1,82 @@
+﻿@model Tour.Admin.Models.TicketViewModel
+@{
+    Layout = null;
+}
+<style>
+    .error-valid {
+        color: red;
+    }
+</style>
+<div id="MenuModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("_Update", "Ticket", FormMethod.Post, new { id = "frmUpdate" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.TTicketIdChange)
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Customer<span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.userId, new SelectList(ViewBag.listCustomer, "Id", "email"), "---Khách hàng---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.userId)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Chuyến bay<span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.flightId, new SelectList(ViewBag.listFlight, "Id", "name"), "---Chuyến bay---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.flightId)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Loại vé<span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.TTicketId, new SelectList(ViewBag.ListTTicket, "Id", "price"), "---Loại vé---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.TTicketId)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnUpdate" class="btn btn-success btn-sm float-sm-right disableBtnSave"><span class="fa fa-save"></span>Lưu</button>
+                        <button type="button" class="btn btn-danger btn btn-sm float-sm-right btn-popup-cancel" id="btnClose" style="margin-right:5px" data-dismiss="modal"><span class="fa fa-times"></span>Thoát</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $('#frmUpdate').validate({
+        rules: {
+            "userId": {
+                required: true
+            },
+            "flightId": {
+                required: true
+            },
+            "TTicketId": {
+                required: true
+            },
+        },
+        messages: {
+            "userId": "Vui lòng không để trống",
+            "TTicketId": "Vui lòng không để trống",
+            "flightId": "Vui lòng không để trống",
+        },
+        errorPlacement: function (error, element) {
+            error.addClass('error-valid');
+            error.insertAfter(element);
+            if (element.attr("name") == "") {
+                error.insertAfter("#");
+            }
+        }
+    })
+</script>

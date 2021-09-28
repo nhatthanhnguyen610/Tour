@@ -8,62 +8,62 @@ using Tour.Provider;
 
 namespace Tour.Service
 {
-    public class NewsService : INewsService
+    public class FlightService : IFlightService
     {
-        INewsProvider _NewsProvider;
-        public NewsService(string appId, string userId = "0")
+        IFlightProvider _FlightProvider;
+        public FlightService(string appId, string userId = "0")
         {
-            _NewsProvider = new NewsProvider(appId, userId);
+            _FlightProvider = new FlightProvider(appId, userId);
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy danh sách bài viết
+        /// Description: Lấy danh sách chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<NewsModel> GetList(SysUsrUserFilterModel model)
+        public List<FlightModel> GetList(SysUsrUserFilterModel model)
         {
-            return _NewsProvider.GetList(model);
+            return _FlightProvider.GetList(model);
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Thêm bài viết
+        /// Description: Thêm chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool InsertSysNews(NewsModel model)
+        public bool InsertFlight(FlightModel model)
         {
-            return _NewsProvider.InsertSysNews(model);
+            return _FlightProvider.InsertFlight(model);
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy thông tin bài viết
+        /// Description: Lấy thông tin chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public NewsModel GetInfo(decimal newsId)
+        public FlightModel GetInfo(decimal Id)
         {
-            return _NewsProvider.GetInfo(newsId);
+            return _FlightProvider.GetInfo(Id);
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Cập nhật bài viết
+        /// Description: Cập nhật chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateSysNews(NewsModel model)
+        public bool UpdateFlight(FlightModel model)
         {
-            return _NewsProvider.UpdateSysNews(model);
+            return _FlightProvider.UpdateFlight(model);
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Xóa bài viết
+        /// Description: Xóa chuyến bay
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool DeleteSysNews(NewsModel model)
+        public bool DeleteFlight(FlightModel model)
         {
-            return _NewsProvider.DeleteSysNews(model);
+            return _FlightProvider.DeleteFlight(model);
         }
     }
 }

@@ -6,29 +6,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tour.Admin.Models;
 using Tour.Base;
-using Tour.Service;
 using Tour.Common.Constants;
+using Tour.Service;
 
 namespace Tour.Admin.Controllers
 {
-    public class SysMenuController : BaseController
+    public class CommentController : BaseController
     {
-        ISysMenuService _sysMenuService;
-        public SysMenuController()
-        {
-            _sysMenuService = new SysMenuService(string.Empty);
+        ICommentService _CommentService;
+        public CommentController() {
+            _CommentService = new CommentService(string.Empty);
         }
         public IActionResult Index()
         {
-            var vm = new SysMenuUserVM();
+            var vm = new CommentVM();
             try
             {
                 var model = new SysUsrUserFilterModel();
                 vm.p = vm.p == 0 ? 1 : vm.p;
                 model.pageIndex = vm.p;
                 model.pageSize = DefinedConstants.RowPerPage;
-                var _listUser = _sysMenuService.GetListMenuSysUsr(model);
-                vm.ListMenuUser = _listUser;
+                var _listComment = _CommentService.GetList(model);
+                vm.ListComment = _listComment;
+                var _listNews = _CommentService.GetListNews();
+                vm.ListNews = _listNews;
             }
             catch (Exception ex)
             {
@@ -42,15 +43,16 @@ namespace Tour.Admin.Controllers
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public PartialViewResult _Index(SysMenuUserVM vm)
+        public PartialViewResult _Index(CommentVM vm)
         {
             try
             {
                 ViewBag.Paging = vm.p;
-                var viewModel = vm.ConvertObject<SysMenuUserVM, SysUsrUserFilterModel>();
+                var viewModel = vm.ConvertObject<CommentVM, SysUsrUserFilterModel>();
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
-                vm.ListMenuUser = _sysMenuService.GetListMenuSysUsr(viewModel);
+                vm.ListComment = _CommentService.GetList(viewModel);
+                vm.ListNews = _CommentService.GetListNews();
 
             }
             catch (Exception ex)
@@ -62,42 +64,34 @@ namespace Tour.Admin.Controllers
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description: Tạo bài viết mới
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         public IActionResult _Create()
         {
-            return View(new SysMenuUserViewModel());
+            ViewBag.listNews = _CommentService.GetListNews();
+            return View(new CommentViewModel());
         }
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description:  Tạo bài viết mới
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Create(SysMenuUserViewModel vm)
+        public ActionResult _Create(CommentViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<CommentViewModel, CommentModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuTitleCde))
+                if (!string.IsNullOrWhiteSpace(model.content) && model.rate <= 5)
                 {
-                    var submitResult = _sysMenuService.InsertSysMenu(model);
+                    var submitResult = _CommentService.InsertComment(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -123,19 +117,21 @@ namespace Tour.Admin.Controllers
             }
 
         }
+
         /// <summary>
         ///  Author: dtr
         ///  Description: cập nhật
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        public IActionResult _Update(decimal menuID)
+        public IActionResult _Update(decimal commentID)
         {
-            var vm = new SysMenuUserViewModel();
+            var vm = new CommentViewModel();
             try
             {
-                var _lstMenu = _sysMenuService.GetInfoSysUsrMenu(menuID);
-                vm = _lstMenu.ConvertObject<SysMenuUserModel, SysMenuUserViewModel>();
+                var _lstComment = _CommentService.GetInfo(commentID);
+                vm = _lstComment.ConvertObject<CommentModel, CommentViewModel>();
+                ViewBag.listNews = _CommentService.GetListNews();
             }
             catch (Exception ex)
             {
@@ -152,24 +148,15 @@ namespace Tour.Admin.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Update(SysMenuUserViewModel vm)
+        public ActionResult _Update(CommentViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<CommentViewModel, CommentModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.actionOrClass) && !string.IsNullOrWhiteSpace(model.controller))
+                if (!string.IsNullOrWhiteSpace(model.content))
                 {
-                    var submitResult = _sysMenuService.UpdateSysUsrMenu(model);
+                    var submitResult = _CommentService.UpdateComment(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -195,19 +182,19 @@ namespace Tour.Admin.Controllers
             }
         }
         /// <summary>
-        /// DeleteSysUsrMenu
+        /// DeleteSysNews
         /// </summary>
         /// <param name="pmenuID"></param>
         /// <param name="pRowVersion"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult DeleteSysMenu(decimal pmenuID)
+        public JsonResult Delete(decimal commentID)
         {
-            SysMenuUserModel model = new SysMenuUserModel()
+            CommentModel model = new CommentModel()
             {
-                id = pmenuID,
+                id = commentID,
             };
-            var submitResult = _sysMenuService.DeleteSysUsrMenu(model);
+            var submitResult = _CommentService.DeleteComment(model);
             return Json(new
             {
                 IsSuccess = submitResult,

@@ -6,29 +6,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tour.Admin.Models;
 using Tour.Base;
-using Tour.Service;
 using Tour.Common.Constants;
+using Tour.Service;
 
 namespace Tour.Admin.Controllers
 {
-    public class SysMenuController : BaseController
+    public class TypeTicketController : BaseController
     {
-        ISysMenuService _sysMenuService;
-        public SysMenuController()
+        ITypeTicketService _TypeTicketService;
+        public TypeTicketController()
         {
-            _sysMenuService = new SysMenuService(string.Empty);
+            _TypeTicketService = new TypeTicketService(string.Empty);
         }
         public IActionResult Index()
         {
-            var vm = new SysMenuUserVM();
+            var vm = new TypeTicketVM();
             try
             {
                 var model = new SysUsrUserFilterModel();
                 vm.p = vm.p == 0 ? 1 : vm.p;
                 model.pageIndex = vm.p;
                 model.pageSize = DefinedConstants.RowPerPage;
-                var _listUser = _sysMenuService.GetListMenuSysUsr(model);
-                vm.ListMenuUser = _listUser;
+                var _listTypeTicket = _TypeTicketService.GetList(model);
+                vm.ListTTicket = _listTypeTicket;
+                var _listFlight = _TypeTicketService.GetListFlight();
+                vm.ListFlight = _listFlight;
             }
             catch (Exception ex)
             {
@@ -42,16 +44,16 @@ namespace Tour.Admin.Controllers
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public PartialViewResult _Index(SysMenuUserVM vm)
+        public PartialViewResult _Index(TypeTicketVM vm)
         {
             try
             {
                 ViewBag.Paging = vm.p;
-                var viewModel = vm.ConvertObject<SysMenuUserVM, SysUsrUserFilterModel>();
+                var viewModel = vm.ConvertObject<TypeTicketVM, SysUsrUserFilterModel>();
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
-                vm.ListMenuUser = _sysMenuService.GetListMenuSysUsr(viewModel);
-
+                vm.ListTTicket = _TypeTicketService.GetList(viewModel);
+                vm.ListFlight = _TypeTicketService.GetListFlight();
             }
             catch (Exception ex)
             {
@@ -62,42 +64,34 @@ namespace Tour.Admin.Controllers
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description: Tạo loại vé mới
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         public IActionResult _Create()
         {
-            return View(new SysMenuUserViewModel());
+            ViewBag.listFlight = _TypeTicketService.GetListFlight();
+            return View(new TypeTicketViewModel());
         }
 
         /// <summary>
         ///  Author: dtr
-        ///  Description: Tạo menu hệ thống
+        ///  Description:  Tạo loại vé mới
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Create(SysMenuUserViewModel vm)
+        public ActionResult _Create(TypeTicketViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<TypeTicketViewModel, TypeTicketModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.menuTitleCde))
+                if (!string.IsNullOrWhiteSpace(model.type) && !string.IsNullOrWhiteSpace(model.price.ToString()))
                 {
-                    var submitResult = _sysMenuService.InsertSysMenu(model);
+                    var submitResult = _TypeTicketService.InsertTypeTicket(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -123,19 +117,21 @@ namespace Tour.Admin.Controllers
             }
 
         }
+
         /// <summary>
         ///  Author: dtr
         ///  Description: cập nhật
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        public IActionResult _Update(decimal menuID)
+        public IActionResult _Update(decimal tTicketID)
         {
-            var vm = new SysMenuUserViewModel();
+            var vm = new TypeTicketViewModel();
             try
             {
-                var _lstMenu = _sysMenuService.GetInfoSysUsrMenu(menuID);
-                vm = _lstMenu.ConvertObject<SysMenuUserModel, SysMenuUserViewModel>();
+                var _lstTTicket = _TypeTicketService.GetInfo(tTicketID);
+                vm = _lstTTicket.ConvertObject<TypeTicketModel, TypeTicketViewModel>();
+                ViewBag.listFlight = _TypeTicketService.GetListFlight();
             }
             catch (Exception ex)
             {
@@ -152,24 +148,15 @@ namespace Tour.Admin.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Update(SysMenuUserViewModel vm)
+        public ActionResult _Update(TypeTicketViewModel vm)
         {
-            var model = vm.ConvertObject<SysMenuUserViewModel, SysMenuUserModel>();
+            var model = vm.ConvertObject<TypeTicketViewModel, TypeTicketModel>();
             model.createdBy = Constants.UserCde;
-            model.orderBy = 1;
             try
             {
-                //if (_sysUsrUserService.IsMenuTitlelUsed(model))
-                //{
-                //    return Json(new
-                //    {
-                //        IsSuccess = false,
-                //        Message = "Title đã có người dùng"
-                //    });
-                //}
-                if (!string.IsNullOrWhiteSpace(model.menuCode) && !string.IsNullOrWhiteSpace(model.actionOrClass) && !string.IsNullOrWhiteSpace(model.controller))
+                if (!string.IsNullOrWhiteSpace(model.type) && !string.IsNullOrWhiteSpace(model.price.ToString()))
                 {
-                    var submitResult = _sysMenuService.UpdateSysUsrMenu(model);
+                    var submitResult = _TypeTicketService.UpdateTypeTicket(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -195,19 +182,19 @@ namespace Tour.Admin.Controllers
             }
         }
         /// <summary>
-        /// DeleteSysUsrMenu
+        /// DeleteTypeTicket
         /// </summary>
-        /// <param name="pmenuID"></param>
+        /// <param name="pTTicketID"></param>
         /// <param name="pRowVersion"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult DeleteSysMenu(decimal pmenuID)
+        public JsonResult Delete(decimal pTTicketID)
         {
-            SysMenuUserModel model = new SysMenuUserModel()
+            TypeTicketModel model = new TypeTicketModel()
             {
-                id = pmenuID,
+                Id = pTTicketID,
             };
-            var submitResult = _sysMenuService.DeleteSysUsrMenu(model);
+            var submitResult = _TypeTicketService.DeleteTypeTicket(model);
             return Json(new
             {
                 IsSuccess = submitResult,

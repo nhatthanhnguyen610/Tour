@@ -10,20 +10,20 @@ using static Tour.Provider.Connection.ConnectString;
 
 namespace Tour.Provider
 {
-    public class NewsProvider : ConnectSqlExecute, INewsProvider
+    public class TypeTicketProvider : ConnectSqlExecute, ITypeTicketProvider
     {
-        public NewsProvider(string appId, string userId)
+        public TypeTicketProvider(string appId, string userId)
            : base(ConnectCode.DBConnection, appId, userId)
         {
 
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy danh sách bài viết
+        /// Description: Lấy danh sách loại vé
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<NewsModel> GetList(SysUsrUserFilterModel model)
+        public List<TypeTicketModel> GetList(SysUsrUserFilterModel model)
         {
             var paramObj = new object[]
             {
@@ -32,29 +32,30 @@ namespace Tour.Provider
                 model.pageIndex,
                 model.pageSize
             };
-            var resultMenu = base.ExecProcedure<NewsModel>("sp_News_GetList_V01", paramObj);
-            if (resultMenu.Any())
+            var resultComment = base.ExecProcedure<TypeTicketModel>("sp_TypeTicket_GetList_V01", paramObj);
+            if (resultComment.Any())
             {
-                return resultMenu.ToList();
+                return resultComment.ToList();
             }
             return null;
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Thêm bài viết
+        /// Description: Thêm loại vé
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool InsertSysNews(NewsModel model)
+        public bool InsertTypeTicket(TypeTicketModel model)
         {
             var paramObj = new object[]
             {
-                model.title,
-                model.description,
-                model.category,
+                model.type,
+                model.price,
+                model.stock,
+                model.flightId,
                 model.createdBy
             };
-            var result = base.ExeScalar("sp_News_Insert_V01", paramObj);
+            var result = base.ExeScalar("sp_TypeTicket_Insert_V01", paramObj);
             if (result != null && result.ToString().Equals("1"))
             {
                 return true;
@@ -63,40 +64,41 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Lấy thông tin bài viết
+        /// Description: Lấy thông tin loại vé
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public NewsModel GetInfo(decimal newsId)
+        public TypeTicketModel GetInfo(decimal Id)
         {
             var paramObj = new object[]
             {
-               newsId
+               Id
             };
-            var result = base.ExecProcedure<NewsModel>("sp_News_GetInfo_V01", paramObj);
+            var result = base.ExecProcedure<TypeTicketModel>("sp_TypeTicket_GetInfo_V01", paramObj);
             if (result.Any())
             {
                 return result.FirstOrDefault();
             }
-            return new NewsModel();
+            return new TypeTicketModel();
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Cập nhật bài viết
+        /// Description: Cập nhật loại vé
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateSysNews(NewsModel model)
+        public bool UpdateTypeTicket(TypeTicketModel model)
         {
             var paramObj = new object[]
-            {
-                model.newsId,
-                model.title,
-                model.description,
-                model.category,
+           {
+                model.Id,
+                model.type,
+                model.price,
+                model.stock,
+                model.flightId,
                 model.createdBy
-            };
-            var result = base.ExeScalar("sp_News_Update_V01", paramObj);
+           };
+            var result = base.ExeScalar("sp_TypeTicket_Update_V01", paramObj);
             if (result != null && result.ToString().Equals(ResultCode.Success))
             {
                 return true;
@@ -105,22 +107,37 @@ namespace Tour.Provider
         }
         /// <summary>
         /// CreateBy: dtr
-        /// Description: Xóa bài viết
+        /// Description: Xóa loại vé
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool DeleteSysNews(NewsModel model)
+        public bool DeleteTypeTicket(TypeTicketModel model)
         {
             var paramObj = new object[]
             {
-                model.newsId
+                model.Id
             };
-            var result = base.ExeScalar("sp_News_Delete_V01", paramObj);
+            var result = base.ExeScalar("sp_TypeTicket_Delete_V01", paramObj);
             if (result != null)
             {
                 return true;
             }
             return false;
+        }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListFlight()
+        {
+            var resultComment = base.ExecProcedure<FlightModel>("sp_TypeTicket_GetListFlight_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
         }
     }
 }
