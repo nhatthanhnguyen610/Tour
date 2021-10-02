@@ -1,48 +1,164 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Traveler - @ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Website Template by GetTemplates.co" />
+    <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+    <meta name="author" content="GetTemplates.co" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="~/assert/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="~/assert/css/icomoon.css">
+    <!-- Themify Icons-->
+    <link rel="stylesheet" href="~/assert/css/themify-icons.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="~/assert/css/bootstrap.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/assert/css/magnific-popup.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/assert/css/bootstrap-datepicker.min.css">
+
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="~/assert/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assert/css/owl.theme.default.min.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="~/assert/css/style.css">
+
+    <!-- Modernizr JS -->
+    <script src="~/assert/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UI</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="gtco-loader"></div>
+
+    <div id="page">
+
+
+        @await Html.PartialAsync("_Partial_HeaderInfo")
+
+        
+        @RenderBody()
+
+
+        <footer id="gtco-footer" role="contentinfo">
+            <div class="gtco-container">
+                <div class="row row-p	b-md">
+                    <div class="col-md-4">
+                        <div class="gtco-widget">
+                            <h3>Về chúng tôi</h3>
+                            <p>Luôn đặt khách hàng lên hàng đầu! Sự hài lòng của quý khách là thành công của chúng tôi!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-push-1">
+                        <div class="gtco-widget">
+                            <h3>Điểm đến được yêu thích</h3>
+                            <ul class="gtco-footer-links">
+                                <li><a href="#">Đà Lạt</a></li>
+                                <li><a href="#">Đà Nẵng</a></li>
+                                <li><a href="#">Nha Trang</a></li>
+                                <li><a href="#">Nam Du</a></li>
+                                <li><a href="#">Phú Quốc</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-push-1">
+                        <div class="gtco-widget">
+                            <h3>Hotels</h3>
+                            <ul class="gtco-footer-links">
+                                <li><a href="#">Luxe Hotel</a></li>
+                                <li><a href="#">Italy 5 Star hotel</a></li>
+                                <li><a href="#">Dubai Hotel</a></li>
+                                <li><a href="#">Deluxe Hotel</a></li>
+                                <li><a href="#">BoraBora Hotel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-md-push-1">
+                        <div class="gtco-widget">
+                            <h3>Liên hệ</h3>
+                            <ul class="gtco-quick-contact">
+                                <li><a href="#"><i class="icon-phone"></i> +84 949 403 701</a></li>
+                                <li><a href="#"><i class="icon-mail2"></i> 1851050128thanh@ou.edu.com</a></li>
+                                <li><a href="#"><i class="icon-mail2"></i> duytruong</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+                <div class="row copyright">
+                    <div class="col-md-12">
+                        <p class="pull-left">
+                            <small class="block">&copy; 2021 Tour du lịch giá tốt</small>
+                            <small class="block">Thiết kế bởi <a href="https://www.facebook.com/Error.User.Profile.Load/" target="_blank">Nguyễn Nhật Thanh</a> và <a href="https://www.facebook.com/duytruong.pham.522" target="_blank">Phạm Duy Trường</a></small>
+                        </p>
+                        <p class="pull-right">
+                            <ul class="gtco-social-icons pull-right">
+                                <li><a href="#"><i class="icon-twitter"></i></a></li>
+                                <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                            </ul>
+                        </p>
+                    </div>
+                  </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </footer>
+
+        <!-- </div> -->
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/assert/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="~/assert/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/assert/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/assert/js/jquery.waypoints.min.js"></script>
+    <!-- Carousel -->
+    <script src="~/assert/js/owl.carousel.min.js"></script>
+    <!-- countTo -->
+    <script src="~/assert/js/jquery.countTo.js"></script>
+
+    <!-- Stellar Parallax -->
+    <script src="~/assert/js/jquery.stellar.min.js"></script>
+
+    <!-- Magnific Popup -->
+    <script src="~/assert/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assert/js/magnific-popup-options.js"></script>
+
+    <!-- Datepicker -->
+    <script src="~/assert/js/bootstrap-datepicker.min.js"></script>
+
+
+    <!-- Main -->
+    <script src="~/assert/js/main.js"></script>
 </body>
 </html>
