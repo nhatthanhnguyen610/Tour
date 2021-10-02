@@ -21,7 +21,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Customer<span style="color:red">*</span></label>
-                                @Html.DropDownListFor(m => m.userId, new SelectList(ViewBag.listCustomer, "Id", "email"), "---Khách hàng---", new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.userId, new { @class = "form-control", @placeholder = "Customer" })
                                 @Html.ValidationMessageFor(m => m.userId)
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Chuyến bay<span style="color:red">*</span></label>
-                                @Html.DropDownListFor(m => m.flightId, new SelectList(ViewBag.listFlight, "Id", "name"), "---Chuyến bay---", new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.flightId, new SelectList(ViewBag.listFlight, "Id", "name"), "---Chuyến bay---", new { @class = "form-control", onchange = "update()" })
                                 @Html.ValidationMessageFor(m => m.flightId)
                             </div>
                         </div>
@@ -39,8 +39,22 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Loại vé<span style="color:red">*</span></label>
-                                @Html.DropDownListFor(m => m.TTicketId, new SelectList(ViewBag.ListTTicket, "Id", "price"), "---Loại vé---", new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.TTicketId, new SelectList(ViewBag.ListTTicket, "Id", "type"), "---Loại vé---", new { @class = "form-control", onchange = "update()" })
                                 @Html.ValidationMessageFor(m => m.TTicketId)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                @Html.TextBoxFor(m => m.quantity, new { @class = "form-control", @placeholder = "Số lượng", onchange = "update()" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Giá</label>
+                                @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
@@ -79,4 +93,28 @@
             }
         }
     })
+
+    function update() {
+        var select = document.getElementById('TTicketId');
+        var option = select.options[select.selectedIndex];
+
+        var select1 = document.getElementById('flightId');
+        var option1 = select1.options[select1.selectedIndex];
+
+        var objf = @Html.Raw(Json.Serialize(ViewBag.listFlight))
+        var found = objf.find(e => e.Id == option1.value)
+        console.log(found)
+        var tigia = found.tigia
+
+        var obj = @Html.Raw(Json.Serialize(ViewBag.ListTTicket))
+        var type = obj.find(e => e.Id == option.value)
+        console.log(type)
+
+        var q = document.getElementById('quantity').value
+        console.info(q)
+
+        document.getElementById('price').value = type.price * tigia * q
+    }
+
+    update();
 </script>

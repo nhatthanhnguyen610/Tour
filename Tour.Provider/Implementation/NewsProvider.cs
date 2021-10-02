@@ -52,6 +52,7 @@ namespace Tour.Provider
                 model.title,
                 model.description,
                 model.category,
+                model.flightId,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_News_Insert_V01", paramObj);
@@ -94,6 +95,7 @@ namespace Tour.Provider
                 model.title,
                 model.description,
                 model.category,
+                model.flightId,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_News_Update_V01", paramObj);
@@ -121,6 +123,21 @@ namespace Tour.Provider
                 return true;
             }
             return false;
+        }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListFlight() 
+        {
+            var resultComment = base.ExecProcedure<FlightModel>("sp_News_GetListFlight_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
         }
     }
 }

@@ -101,8 +101,8 @@ namespace Tour.Admin.Controllers
                 if (!string.IsNullOrWhiteSpace(model.userId.ToString()) && !string.IsNullOrWhiteSpace(model.flightId.ToString()) 
                     && !string.IsNullOrWhiteSpace(model.TTicketId.ToString()))
                 {
-                    model.TTicketIdChange = model.TTicketId;
-                    var submitResult = _TicketService.InsertTicket(model) && _TicketService.ReduceStock(model.TTicketId);
+                    model.TTicketIdChange = model.flightId;
+                    var submitResult = _TicketService.InsertTicket(model) && _TicketService.ReduceStock(model.flightId);
                     return Json(new
                     {
                         IsSuccess = submitResult,
@@ -170,14 +170,14 @@ namespace Tour.Admin.Controllers
                 if (!string.IsNullOrWhiteSpace(model.userId.ToString()) && !string.IsNullOrWhiteSpace(model.flightId.ToString())
                     && !string.IsNullOrWhiteSpace(model.TTicketId.ToString()))
                 {
-                    if (model.TTicketId != model.TTicketIdChange)
+                    if (model.flightId != model.TTicketIdChange)
                     {
-                        if (_TicketService.IncreaseStock(model.TTicketIdChange) && _TicketService.ReduceStock(model.TTicketId))
+                        if (_TicketService.IncreaseStock(model.TTicketIdChange) && _TicketService.ReduceStock(model.flightId))
                         {
-                            model.TTicketIdChange = model.TTicketId;
+                            model.TTicketIdChange = model.flightId;
                         } 
                     }
-                    model.TTicketIdChange = model.TTicketId;
+                    model.TTicketIdChange = model.flightId;
                     var submitResult = _TicketService.UpdateTicket(model);
                     return Json(new
                     {
@@ -216,7 +216,8 @@ namespace Tour.Admin.Controllers
             {
                 Id = ticketID,
             };
-            var submitResult = _TicketService.DeleteTicket(model) && _TicketService.IncreaseStock(ticketID);
+            var flight = _TicketService.GetInfo(ticketID).flightId;
+            var submitResult = _TicketService.DeleteTicket(model) && _TicketService.IncreaseStock(flight);
             return Json(new
             {
                 IsSuccess = submitResult,

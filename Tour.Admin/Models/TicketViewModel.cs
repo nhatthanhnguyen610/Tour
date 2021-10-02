@@ -34,5 +34,7 @@ namespace Tour.Admin.Models
         public int flightId { get; set; }
         public int TTicketId { get; set; }
         public int TTicketIdChange { get; set; }
+        public int quantity { get; set; }
+        public decimal price { get; set; }
     }
 }

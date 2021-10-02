@@ -29,8 +29,6 @@ namespace Tour.Admin.Controllers
                 model.pageSize = DefinedConstants.RowPerPage;
                 var _listTypeTicket = _TypeTicketService.GetList(model);
                 vm.ListTTicket = _listTypeTicket;
-                var _listFlight = _TypeTicketService.GetListFlight();
-                vm.ListFlight = _listFlight;
             }
             catch (Exception ex)
             {
@@ -53,7 +51,6 @@ namespace Tour.Admin.Controllers
                 viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
                 viewModel.pageSize = DefinedConstants.RowPerPage;
                 vm.ListTTicket = _TypeTicketService.GetList(viewModel);
-                vm.ListFlight = _TypeTicketService.GetListFlight();
             }
             catch (Exception ex)
             {
@@ -70,7 +67,6 @@ namespace Tour.Admin.Controllers
         /// <returns></returns>
         public IActionResult _Create()
         {
-            ViewBag.listFlight = _TypeTicketService.GetListFlight();
             return View(new TypeTicketViewModel());
         }
 
@@ -131,7 +127,6 @@ namespace Tour.Admin.Controllers
             {
                 var _lstTTicket = _TypeTicketService.GetInfo(tTicketID);
                 vm = _lstTTicket.ConvertObject<TypeTicketModel, TypeTicketViewModel>();
-                ViewBag.listFlight = _TypeTicketService.GetListFlight();
             }
             catch (Exception ex)
             {

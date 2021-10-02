@@ -44,5 +44,12 @@ namespace Tour.Service
         /// <param name="model"></param>
         /// <returns></returns>
         bool DeleteSysNews(NewsModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        List<FlightModel> GetListFlight();
     }
 }

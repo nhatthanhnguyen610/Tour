@@ -51,8 +51,6 @@ namespace Tour.Provider
             {
                 model.type,
                 model.price,
-                model.stock,
-                model.flightId,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_TypeTicket_Insert_V01", paramObj);
@@ -94,8 +92,6 @@ namespace Tour.Provider
                 model.Id,
                 model.type,
                 model.price,
-                model.stock,
-                model.flightId,
                 model.createdBy
            };
             var result = base.ExeScalar("sp_TypeTicket_Update_V01", paramObj);

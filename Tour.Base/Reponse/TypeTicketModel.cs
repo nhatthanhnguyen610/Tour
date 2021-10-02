@@ -11,8 +11,6 @@ namespace Tour.Base
         public decimal Id { get; set; }
         public string type { get; set; }
         public decimal price { get; set; }
-        public int stock { get; set; }
-        public int flightId { get; set; }
         public int totalRows { get; set; }
         public int totalPages { get; set; }
     }

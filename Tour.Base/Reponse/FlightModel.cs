@@ -14,6 +14,8 @@ namespace Tour.Base
         public string description { get; set; }
         public DateTime? date { get; set; }
         public string duaration { get; set; }
+        public int stock { get; set; }
+        public decimal tigia { get; set; }
         public int totalRows { get; set; }
         public int totalPages { get; set; }
     }

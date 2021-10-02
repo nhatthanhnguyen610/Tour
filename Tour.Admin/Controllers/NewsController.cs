@@ -68,6 +68,7 @@ namespace Tour.Admin.Controllers
         /// <returns></returns>
         public IActionResult _Create()
         {
+            ViewBag.listFlight = _sysNewsService.GetListFlight();
             return View(new NewsViewModel());
         }
 
@@ -128,6 +129,7 @@ namespace Tour.Admin.Controllers
             {
                 var _lstMenu = _sysNewsService.GetInfo(newsID);
                 vm = _lstMenu.ConvertObject<NewsModel, NewsViewModel>();
+                ViewBag.listFlight = _sysNewsService.GetListFlight();
             }
             catch (Exception ex)
             {

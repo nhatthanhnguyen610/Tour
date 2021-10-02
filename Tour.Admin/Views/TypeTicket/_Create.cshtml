@@ -32,26 +32,11 @@
                         @Html.ValidationMessageFor(m => m.type)
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col">
                             <div class="form-group">
                                 <label>Price<span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.price, new { @class = "form-control", @placeholder = "Price" })
                                 @Html.ValidationMessageFor(m => m.price)
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Stock</label>
-                                @Html.TextBoxFor(m => m.stock, new { @class = "form-control", @placeholder = "Stock" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Chuyến bay<span style="color:red">*</span></label>
-                                @Html.DropDownListFor(m => m.flightId, new SelectList(ViewBag.listFlight, "Id", "name"), "---Chuyến bay---", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.flightId)
                             </div>
                         </div>
                     </div>
@@ -70,9 +55,6 @@
             "price": {
                 required: true
             },
-            "flightId": {
-                required: true
-            },
             "type": {
                 required: true
             },
@@ -80,7 +62,6 @@
         messages: {
             "type": "Vui lòng không để trống",
             "price": "Vui lòng không để trống",
-            "flightId": "Vui lòng không để trống",
         },
         errorPlacement: function (error, element) {
             error.addClass('error-valid');

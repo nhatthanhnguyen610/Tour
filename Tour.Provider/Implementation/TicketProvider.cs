@@ -98,6 +98,8 @@ namespace Tour.Provider
                 model.flightId,
                 model.TTicketId,
                 model.TTicketIdChange,
+                model.quantity,
+                model.price,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_Ticket_Insert_V01", paramObj);
@@ -141,6 +143,8 @@ namespace Tour.Provider
                 model.flightId,
                 model.TTicketId,
                 model.TTicketIdChange,
+                model.quantity,
+                model.price,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_Ticket_Update_V01", paramObj);

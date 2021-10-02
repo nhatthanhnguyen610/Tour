@@ -65,5 +65,15 @@ namespace Tour.Service
         {
             return _NewsProvider.DeleteSysNews(model);
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListFlight() 
+        {
+            return _NewsProvider.GetListFlight();
+        }
     }
 }

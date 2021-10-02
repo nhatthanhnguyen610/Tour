@@ -30,5 +30,6 @@ namespace Tour.Admin.Models
         public string title { get; set; }
         public string description { get; set; }
         public string category { get; set; }
+        public int flightId { get; set; }
     }
 }

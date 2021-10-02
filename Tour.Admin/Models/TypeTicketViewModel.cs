@@ -15,7 +15,6 @@ namespace Tour.Admin.Models
         public int p { get; set; }
         public string keyWord { get; set; }
         public List<TypeTicketModel> ListTTicket { get; set; }
-        public List<FlightModel> ListFlight { get; set; }
         public int TotalRows
         {
             get
@@ -30,7 +29,5 @@ namespace Tour.Admin.Models
         public decimal Id { get; set; }
         public string type { get; set; }
         public decimal price { get; set; }
-        public int stock { get; set; }
-        public int flightId { get; set; }
     }
 }

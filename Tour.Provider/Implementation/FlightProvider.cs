@@ -54,6 +54,8 @@ namespace Tour.Provider
                 model.description,
                 model.date,
                 model.duaration,
+                model.stock,
+                model.tigia,
                 model.createdBy
             };
             var result = base.ExeScalar("sp_Flight_Insert_V01", paramObj);
@@ -97,6 +99,8 @@ namespace Tour.Provider
                 model.image,
                 model.description,
                 model.date,
+                model.stock,
+                model.tigia,
                 model.duaration,
                 model.createdBy
             };
