@@ -151,5 +151,25 @@ namespace Tour.Provider
             }
             return false;
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Đăng nhập người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public SysCustomerModel LoginSys(LoginRequestModel model)
+        {
+            var paramObj = new object[]
+            {
+                model.email,
+                model.passWord
+            };
+            var result = base.ExecProcedure<SysCustomerModel>("sp_SysCustomer_Login_V01", paramObj);
+            if (result.Any())
+            {        
+                return result.FirstOrDefault();
+            }
+            return null;
+        }
     }
 }

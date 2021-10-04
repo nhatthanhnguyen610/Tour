@@ -51,5 +51,12 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         bool DeleteSysCustomer(SysCustomerModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Đăng nhập người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        SysCustomerModel LoginSys(LoginRequestModel model);
     }
 }

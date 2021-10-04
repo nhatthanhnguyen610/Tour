@@ -1,4 +1,5 @@
-﻿ <!-- <div class="page-inner"> -->
+﻿@using  Tour.Common.Constants;
+<!-- <div class="page-inner"> -->
 <nav class="gtco-nav" role="navigation">
     <div class="gtco-container">
 
@@ -20,13 +21,16 @@
                     </li> -->
                     <li><a href="/Home/Doitac">Đăng kí đối tác</a></li>
                     <li><a href="/Home/Contact">Liên hệ</a></li>
-                    <li class="has-dropdown">
-                        <a href="#">Xin chào Admin</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Thông tin</a></li>
-                            <li><a href="#">Đăng xuất</a></li>
-                        </ul>
-                    </li>
+                    @if (@Constants.FullName != null)
+                    {
+                        <li class="has-dropdown">     
+                                <a href="#">Xin chào @Constants.FullName</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Thông tin</a></li>
+                                <li><a href="#">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

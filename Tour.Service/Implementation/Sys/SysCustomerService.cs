@@ -75,5 +75,15 @@ namespace Tour.Service
         {
             return _sysCustomerProvider.DeleteSysCustomer(model);
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Đăng nhập người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public SysCustomerModel LoginSys(LoginRequestModel model)
+        {
+            return _sysCustomerProvider.LoginSys(model);
+        }
     }
 }

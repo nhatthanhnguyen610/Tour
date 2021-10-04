@@ -65,7 +65,6 @@ namespace Tour.Admin.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        [AllowAnonymous]
         public ActionResult Login()
         {
             return View(new LoginViewModel());

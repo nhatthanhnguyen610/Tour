@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Tour.UI.Models.LoginViewModel
+@using  Tour.Common.Constants;
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -11,44 +13,52 @@
                     <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
                         <h1>Chào mừng quý khách</h1>
                     </div>
-                    <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
-                        <div class="form-wrap">
-                            <div class="tab">
-                                <div class="tab-content">
-                                    <div class="tab-content-inner active" data-content="signup">
-                                        <h3>Đăng nhập</h3>
-                                        <form action="#">
-                                            <div class="row form-group">
-                                                <div class="col-md-12">
-                                                    <label for="fullname">Tên đăng nhập</label>
-                                                    <input type="text" id="fullname" class="form-control">
+                    @if (@Constants.FullName == null)
+                    {
+                        <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+                            <div class="form-wrap">
+                                <div class="tab">
+                                    <div class="tab-content">
+                                        <div class="tab-content-inner active" data-content="signup">
+                                            <h3>Đăng nhập</h3>
+                                            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "frmLogin" }))
+                                            {
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="userName">Tên đăng nhập</label>
+                                                        @Html.TextBoxFor(m => m.userName, new { @class = "form-control", @type = "email" })
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-md-12">
-                                                    <label for="password">Mật khẩu</label>
-                                                    <input type="password" id="password" class="form-control">
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="password">Mật khẩu</label>
+                                                        @Html.PasswordFor(m => m.password, new { @class = "form-control", @type = "password" })
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <span style="color:red"> @Model.errorMessage</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Đăng nhập">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="button" class="btn btn-default btn-block" value="Đăng kí">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
 
-                                            <div class="row form-group">
-                                                <div class="col-md-12">
-                                                    <input type="submit" class="btn btn-primary btn-block" value="Đăng nhập">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-md-12">
-                                                    <input type="submit" class="btn btn-default btn-block" value="Đăng kí">
-                                                </div>
-                                            </div>
-                                        </form>
+
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
