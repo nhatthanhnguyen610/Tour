@@ -88,5 +88,13 @@ namespace UI.Controllers
         {
             return View();
         }
+        public IActionResult Info()
+        {
+            return View();
+        }
+        public IActionResult Pay()
+        {
+            return View();
+        }
     }
 }

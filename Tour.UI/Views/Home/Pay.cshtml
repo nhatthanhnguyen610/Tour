@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Pay";
+}
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url('../assert/images/img_bg_2.jpg')">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <div class="row row-mt-15em">
+
+                    <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                        <h1>Paying</h1>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div>
+            <form>
+                <div class="form-group">
+                    <label for="flight">Flight</label>
+                    <input type="text" readonly class="form-control border-0" id="flight" value="Flight Name" />
+                </div>
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control">
+                        <option>Adult</option>
+                        <option>Children</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" class="form-control" min="0" id="quantity" onkeydown="return false;"/>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" readonly class="form-control border-0" id="flight" value=" VnD"/>
+                </div>
+                <div class="form-group pull-right">
+                    <div class="fh5co-card-item" style=" width: 91px; height: 43px;">
+                        <div class="fh5co-text">
+                            <p><a href="#"><span class="btn btn-primary">Pay</span></a></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
