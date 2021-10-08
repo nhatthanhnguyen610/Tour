@@ -51,5 +51,12 @@ namespace Tour.Service
         /// <param name="model"></param>
         /// <returns></returns>
         List<FlightModel> GetListFlight();
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách Comments
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        List<CommentModel> GetListComment();
     }
 }

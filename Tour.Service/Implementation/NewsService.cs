@@ -75,5 +75,15 @@ namespace Tour.Service
         {
             return _NewsProvider.GetListFlight();
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách Comments
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<CommentModel> GetListComment()
+        {
+            return _NewsProvider.GetListComment();
+        }
     }
 }

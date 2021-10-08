@@ -139,5 +139,20 @@ namespace Tour.Provider
             }
             return null;
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách Comments
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<CommentModel> GetListComment()
+        {
+            var resultComment = base.ExecProcedure<CommentModel>("sp_News_GetListComment_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
+        }
     }
 }

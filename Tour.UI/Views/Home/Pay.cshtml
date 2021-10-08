@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Tour.UI.Models.TicketViewModel;
+@{
     ViewData["Title"] = "Pay";
 }
 
@@ -26,22 +27,21 @@
             <form>
                 <div class="form-group">
                     <label for="flight">Flight</label>
-                    <input type="text" readonly class="form-control border-0" id="flight" value="Flight Name" />
+                    <input type="text" readonly class="form-control border-0" id="flight" value="@ViewBag.Flight.name" />
                 </div>
                 <div class="form-group">
                     <label for="type">Type</label>
-                    <select class="form-control">
-                        <option>Adult</option>
-                        <option>Children</option>
-                    </select>
+                    @Html.DropDownListFor(m => m.TTicketId, new SelectList(ViewBag.Ticket, "Id", "type"), "---Loại vé---", new { @class = "form-control", onchange = "update()" })
                 </div>
                 <div class="form-group">
                     <label>Quantity</label>
-                    <input type="number" class="form-control" min="0" id="quantity" onkeydown="return false;"/>
+                    @Html.TextBoxFor(m => m.quantity, new { @class = "form-control", Type = "number", @min = "0", onkeydown = "return false", onchange = "update()" })
+                    @*<input type="number" class="form-control" min="0" id="quantity" onkeydown="return false;"/>*@
                 </div>
                 <div class="form-group">
                     <label>Price</label>
-                    <input type="text" readonly class="form-control border-0" id="flight" value=" VnD"/>
+                    @Html.TextBoxFor(m => m.price, new { @class = "form-control border-0", @readonly = "readonly" })
+                    @*<input type="text" readonly class="form-control border-0" id="flight" value=" VnD"/>*@
                 </div>
                 <div class="form-group pull-right">
                     <div class="fh5co-card-item" style=" width: 91px; height: 43px;">
@@ -54,3 +54,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    function update() {
+        var select = document.getElementById('TTicketId');
+        var option = select.options[select.selectedIndex];
+
+        var q = document.getElementById('quantity').value
+        console.log(q)
+
+        var obj = @Html.Raw(Json.Serialize(ViewBag.Ticket))
+        var type = obj.find(e => e.Id == option.value)
+        console.log(type)
+
+        var objF = @Html.Raw(Json.Serialize(ViewBag.Flight))
+        console.log(objF)
+
+        document.getElementById('price').value = type.price * objF.tigia * q
+    }
+
+    update();
+</script>

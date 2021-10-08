@@ -1,4 +1,5 @@
-﻿@model Tour.UI.Models.LoginViewModel
+﻿
+@model Tour.UI.Models.LoginViewModel
 @using  Tour.Common.Constants;
 @{
     ViewData["Title"] = "Home";
@@ -23,6 +24,7 @@
                                             <h3>Đăng nhập</h3>
                                             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "frmLogin" }))
                                             {
+                                                @Html.AntiForgeryToken()
                                                 <div class="row form-group">
                                                     <div class="col-md-12">
                                                         <label for="userName">Tên đăng nhập</label>
@@ -74,143 +76,25 @@
             </div>
         </div>
         <div class="row">
+            @foreach (var item in ViewBag.Flight)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="fh5co-card-item">
+                        <a href="~/assert/images/img_1.jpg" class="image-popup">
+                            <figure>
+                                <div class="overlay"><i class="ti-plus"></i></div>
+                                <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
+                            </figure>
 
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        <p><a href="/Home/Info"><span class="btn btn-primary">Xem thêm</span></a></p>
+                        </a>
+                        <div class="fh5co-text">
+                            <h2>@item.name</h2>
+                            <p>@item.description</p>
+                            <p><a href="@Url.Action("Info", "Home", new { flightID = item.Id })"><span class="btn btn-primary">Xem thêm</span></a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        @if (@Constants.FullName == null)
-                        {
-                            <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
-                        }
-                        else
-                        {
-                            <p><span class="btn btn-primary">Xem thêm</span></p>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        @if (@Constants.FullName == null)
-                        {
-                            <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
-                        }
-                        else
-                        {
-                            <p><span class="btn btn-primary">Xem thêm</span></p>
-                        }
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        @if (@Constants.FullName == null)
-                        {
-                            <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
-                        }
-                        else
-                        {
-                            <p><span class="btn btn-primary">Xem thêm</span></p>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        @if (@Constants.FullName == null)
-                        {
-                            <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
-                        }
-                        else
-                        {
-                            <p><span class="btn btn-primary">Xem thêm</span></p>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-card-item">
-                    <a href="~/assert/images/img_1.jpg" class="image-popup">
-                        <figure>
-                            <div class="overlay"><i class="ti-plus"></i></div>
-                            <img src="~/assert/images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-
-                    </a>
-                    <div class="fh5co-text">
-                        <h2>New York, USA</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-                        @if (@Constants.FullName == null)
-                        {
-                            <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
-                        }
-                        else
-                        {
-                            <p><span class="btn btn-primary">Xem thêm</span></p>
-                        }
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
     </div>
 </div>

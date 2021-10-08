@@ -65,5 +65,15 @@ namespace Tour.Service
         {
             return _FlightProvider.DeleteFlight(model);
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay cho UI
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListUI()
+        {
+            return _FlightProvider.GetListUI();
+        }
     }
 }

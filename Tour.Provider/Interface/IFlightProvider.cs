@@ -44,5 +44,12 @@ namespace Tour.Provider
         /// <param name="model"></param>
         /// <returns></returns>
         bool DeleteFlight(FlightModel model);
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay cho UI
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        List<FlightModel> GetListUI();
     }
 }

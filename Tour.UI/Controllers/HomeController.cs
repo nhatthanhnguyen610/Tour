@@ -20,14 +20,25 @@ namespace UI.Controllers
     public class HomeController : BaseController
     {
         ISysCustomerService _sysCustomerService;
+        IFlightService _flightService;
+        ICommentService _commentService;
+        ITicketService _ticketService;
+        INewsService _newsService;
 
         public HomeController()
         {
             _sysCustomerService = new SysCustomerService(string.Empty);
+            _flightService = new FlightService(string.Empty);
+            _commentService = new CommentService(string.Empty);
+            _ticketService = new TicketService(string.Empty);
+            _newsService = new NewsService(string.Empty);
         }
         [AllowAnonymous]
         public IActionResult Index()
         {
+            var r = new Random();
+            ViewBag.Flight = _flightService.GetListUI().OrderBy(m => r.Next()).Take(6).ToList();
+
             return View(new LoginViewModel());
         }
         /// <summary>
@@ -88,13 +99,35 @@ namespace UI.Controllers
         {
             return View();
         }
-        public IActionResult Info()
+        public IActionResult Info(decimal flightID)
         {
-            return View();
+            var vm = new FlightViewModel();
+            try
+            {
+                var _lstFlight = _flightService.GetInfo(flightID);
+                vm = _lstFlight.ConvertObject<FlightModel, FlightViewModel>();
+                ViewBag.News = _commentService.GetListNews().Where(m => m.flightId == flightID);
+                ViewBag.Ticket = _ticketService.GetListTypeTicket();
+                ViewBag.Comment = _newsService.GetListComment();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(vm);
         }
-        public IActionResult Pay()
+        public IActionResult Pay(decimal flightId)
         {
-            return View();
+            try
+            {
+                ViewBag.Flight = _flightService.GetInfo(flightId);
+                ViewBag.Ticket = _ticketService.GetListTypeTicket();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(new TicketViewModel());
         }
     }
 }

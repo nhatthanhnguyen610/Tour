@@ -130,5 +130,20 @@ namespace Tour.Provider
             }
             return false;
         }
+        /// <summary>
+        /// CreateBy: dtr
+        /// Description: Lấy danh sách chuyến bay cho UI
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<FlightModel> GetListUI()
+        {
+            var resultComment = base.ExecProcedure<FlightModel>("sp_Flight_GetListFlight_V01");
+            if (resultComment.Any())
+            {
+                return resultComment.ToList();
+            }
+            return null;
+        }
     }
 }
