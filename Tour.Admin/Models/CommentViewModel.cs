@@ -16,7 +16,7 @@ namespace Tour.Admin.Models
         public int p { get; set; }
         public string keyWord { get; set; }
         public List<CommentModel> ListComment { get; set; }
-        public List<NewsModel> ListNews { get;set; }
+        public List<NewsModel> ListNews { get; set; }
         public int TotalRows
         {
             get

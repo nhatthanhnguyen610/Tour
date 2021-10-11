@@ -33,19 +33,19 @@
                 <div style="margin-bottom: 35px; display: table; table-layout: fixed; width: 100%; " class="carosuel-c">
                     <div style="position: relative; overflow: hidden; display: block; margin: 0; padding: 0;">
                         <div style="width:774px;">
-                            <img src="~/assert/images/img_1.jpg" alt="img" class="w-100 d-block" />
+                            <img src="@Model.image" alt="img" class="w-100 d-block" />
                         </div>
                     </div>
                 </div>
                 <div style="margin-bottom: 40px;">
                     <div class="collapse" id="collapseExample">
                         <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: solid 1px rgba(0,0,0,.15);">
-                            Comments
+                            Bình luận
                         </div>
                         <div style="padding-left: 30px; position: relative; word-break: break-all;">
                             <form>
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Comments ..."></textarea>
+                                    <textarea class="form-control" placeholder="Bình luận ..."></textarea>
                                 </div>
                                 <button type="button" class="btn btn-primary pull-right">Post</button>
                             </form>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="collapse" id="collapseExample3">
                         <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: solid 1px rgba(0,0,0,.15);">
-                            Description
+                            Chi tiết chuyến đi
                         </div>
                         <div style="padding-left: 30px; position: relative; word-break: break-all;">
                             @Model.description
@@ -90,7 +90,7 @@
                     </div>
                     <div class="collapse" id="collapseExample2">
                         <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: solid 1px rgba(0,0,0,.15);">
-                            News
+                            Bài viết
                         </div>
                         <div style="padding-left: 30px; position: relative;">
                             @foreach (var itemNew in ViewBag.News)
@@ -149,11 +149,11 @@
                 </ul>
                 <div style="margin-bottom: 25px;">
                     <div style="background: #09C6AB; color: #fff; display: flex; align-items: center; padding: 10px; ">
-                        <div>
+                        <div style="border-right: solid 1px #fff;">
                             <div style="margin-right: 5px; ">Adult</div>
                             <div id="pAdult" style="font-size: 25px; line-height: 33px; font-weight: 700; margin-right: 5px;"></div>
                         </div>
-                        <div>
+                        <div style="padding-left: 5px">
                             <div style="margin-right: 5px; ">Children</div>
                             <div id="pChild" style="font-size: 25px; line-height: 33px; font-weight: 700; margin-right: 5px;"></div>
                         </div>
@@ -162,13 +162,13 @@
                 <div class="c" style="background: #707271; margin-bottom: 25px;">
                     <ul style=" list-style: none; padding: 0px;">
                         <li style="border-bottom: solid 1px #fff; padding: 10px; ">
-                            <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" style="color: #ffffff;">@*<span class="fa-comments-o" style="position: relative; padding-right: 25px "></span>*@Description</a>
+                            <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" style="color: #ffffff;">Chi tiết chuyến đi</a>
                         </li>
                         <li style="border-bottom: solid 1px #fff; padding: 10px; ">
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color: #ffffff;">@*<span class="fa-comments-o" style="position: relative; padding-right: 25px "></span>*@Comments</a>
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color: #ffffff;">Bình luận</a>
                         </li>
                         <li style="border-bottom: solid 1px #fff; padding: 10px; ">
-                            <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" style="color: #ffffff;">@*<span class="fa-comments-o" style="position: relative; padding-right: 25px "></span>*@News</a>
+                            <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" style="color: #ffffff;">Bài viết</a>
                         </li>
                     </ul>
                 </div>

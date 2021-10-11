@@ -6,6 +6,24 @@ using Tour.Base;
 
 namespace Tour.UI.Models
 {
+    public class FlightVM
+    {
+        public FlightVM()
+        {
+            ListFlight = new List<FlightModel>();
+        }
+        public int p { get; set; }
+        public string keyWord { get; set; }
+        public List<FlightModel> ListFlight { get; set; }
+        public int TotalRows
+        {
+            get
+            {
+                return ListFlight != null ? (ListFlight.Count > 0 ? ListFlight.First().totalRows : 0) : 0;
+            }
+        }
+    }
+
     public class FlightViewModel
     {
         public decimal Id { get; set; }

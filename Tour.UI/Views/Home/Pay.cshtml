@@ -11,7 +11,7 @@
                 <div class="row row-mt-15em">
 
                     <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
-                        <h1>Paying</h1>
+                        <h1>Thanh Toán</h1>
                     </div>
 
                 </div>
@@ -36,12 +36,10 @@
                 <div class="form-group">
                     <label>Quantity</label>
                     @Html.TextBoxFor(m => m.quantity, new { @class = "form-control", Type = "number", @min = "0", onkeydown = "return false", onchange = "update()" })
-                    @*<input type="number" class="form-control" min="0" id="quantity" onkeydown="return false;"/>*@
                 </div>
                 <div class="form-group">
                     <label>Price</label>
-                    @Html.TextBoxFor(m => m.price, new { @class = "form-control border-0", @readonly = "readonly" })
-                    @*<input type="text" readonly class="form-control border-0" id="flight" value=" VnD"/>*@
+                    @Html.TextBoxFor(m => m.price, new { @class = "form-control border-0", @readonly = "readonly" }) VNĐ
                 </div>
                 <div class="form-group pull-right">
                     <div class="fh5co-card-item" style=" width: 91px; height: 43px;">
@@ -70,7 +68,7 @@
         var objF = @Html.Raw(Json.Serialize(ViewBag.Flight))
         console.log(objF)
 
-        document.getElementById('price').value = type.price * objF.tigia * q
+        document.getElementById('price').value = new Intl.NumberFormat().format(type.price * objF.tigia * q)
     }
 
     update();

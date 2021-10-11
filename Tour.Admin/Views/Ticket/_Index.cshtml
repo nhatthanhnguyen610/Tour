@@ -11,6 +11,7 @@
                     <th>Customer</th>
                     <th>Flight</th>
                     <th>Type</th>
+                    <th>Quantity</th>
                     <th>Price</th>
                     <th></th>
                 </tr>
@@ -39,11 +40,15 @@
                             <td>
                                 @itemTTicket.type
                             </td>
-                            <!-- col 4-->
+                             <!-- col 4-->
+                            <td>
+                                @item.quantity
+                            </td>
+                            <!-- col 5-->
                             <td>
                                 @item.price
                             </td>
-                            <!-- col 5-->
+                            <!-- col 6-->
                             <td class="text-center" style="18%">
                                 <button type="button"
                                         class="btn btn-radius-left btn-info br2 btn-xs fs12 m1 btn-popup-size"

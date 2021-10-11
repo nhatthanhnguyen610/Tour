@@ -87,8 +87,46 @@ namespace UI.Controllers
         [AllowAnonymous]
         public IActionResult Tour()
         {
-            return View();
+            var vm = new FlightVM();
+            try
+            {
+                var model = new SysUsrUserFilterModel();
+                vm.p = vm.p == 0 ? 1 : vm.p;
+                model.pageIndex = vm.p;
+                model.pageSize = DefinedConstants.RowPerPage;
+                var _listFlight = _flightService.GetList(model);
+                vm.ListFlight = _listFlight;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(vm);
         }
+
+        /// <summary>
+        /// _Index
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public IActionResult _Index(FlightVM vm)
+        {
+            try
+            {
+                ViewBag.Paging = vm.p;
+                var viewModel = vm.ConvertObject<FlightVM, SysUsrUserFilterModel>();
+                viewModel.pageIndex = vm.p == 0 ? 1 : vm.p;
+                viewModel.pageSize = DefinedConstants.RowPerPage;
+                vm.ListFlight = _flightService.GetList(viewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View("Tour",vm);
+        }
+
         [AllowAnonymous]
         public IActionResult Doitac()
         {
