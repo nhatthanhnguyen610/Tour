@@ -80,31 +80,11 @@ namespace Tour.Admin.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> _Create(FlightViewModel vm)
+        public IActionResult _Create(FlightViewModel vm)
         {
             var model = vm.ConvertObject<FlightViewModel, FlightModel>();
             try
             {
-                string uploads = string.Format("{0}{1}", PathServer.pathDir, PathServer.pathProduct);
-                foreach (var formFile in Request.Form.Files)
-                {
-                    if (formFile.Length > 0)
-                    {
-                        var fileName = DateTime.Now.ToString(PathServer.yyyyMMddhhmmssfff);
-                        var fileExtension = Path.GetExtension(formFile.FileName);
-                        string fileAvatar = fileName + fileExtension;
-                        string filePath = Path.Combine(uploads, fileAvatar);
-                        if (!Directory.Exists(Path.GetDirectoryName(uploads)))
-                        {
-                            Directory.CreateDirectory(Path.GetDirectoryName(uploads));
-                        }
-                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(fileStream);
-                        }
-                        model.image = string.Format("{0}{1}{2}", PathServer.pathProduct, fileAvatar);
-                    }
-                }
                 model.createdBy = Constants.UserCde;
                 if (!string.IsNullOrWhiteSpace(model.name))
                 {
@@ -163,31 +143,11 @@ namespace Tour.Admin.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> _Update(FlightViewModel vm)
+        public IActionResult _Update(FlightViewModel vm)
         {
             var model = vm.ConvertObject<FlightViewModel, FlightModel>();
             try
             {
-                string uploads = string.Format("{0}{1}", PathServer.pathDir, PathServer.pathProduct);
-                foreach (var formFile in Request.Form.Files)
-                {
-                    if (formFile.Length > 0)
-                    {
-                        var fileName = DateTime.Now.ToString(PathServer.yyyyMMddhhmmssfff);
-                        var fileExtension = Path.GetExtension(formFile.FileName);
-                        string fileAvatar = fileName + fileExtension;
-                        string filePath = Path.Combine(uploads, fileAvatar);
-                        if (!Directory.Exists(Path.GetDirectoryName(uploads)))
-                        {
-                            Directory.CreateDirectory(Path.GetDirectoryName(uploads));
-                        }
-                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(fileStream);
-                        }
-                        model.image = string.Format("{0}{1}{2}", PathServer.pathProduct, fileAvatar);
-                    }
-                }
                 model.createdBy = Constants.UserCde;
                 if (!string.IsNullOrWhiteSpace(model.name))
                 {

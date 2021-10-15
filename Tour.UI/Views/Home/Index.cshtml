@@ -80,17 +80,24 @@
             {
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="fh5co-card-item">
-                        <a href="@item.image" class="image-popup">
+                        <a href="~/assert/img/@item.name/@item.image" class="image-popup">
                             <figure>
                                 <div class="overlay"><i class="ti-plus"></i></div>
-                                <img src="@item.image" alt="Image" class="img-responsive">
+                                <img src="~/assert/img/@item.name/@item.image" alt="Image" class="img-responsive">
                             </figure>
 
                         </a>
                         <div class="fh5co-text">
                             <h2>@item.name</h2>
                             <p>@item.description</p>
-                            <p><a href="@Url.Action("Info", "Home", new { flightID = item.Id })"><span class="btn btn-primary">Xem thêm</span></a></p>
+                            @if (Constants.FullName == null)
+                            {
+                                <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
+                            }
+                            else
+                            {
+                                <p><a href="@Url.Action("Info", "Home", new { flightID = item.Id })"><span class="btn btn-primary">Xem thêm</span></a></p>
+                            }
                         </div>
                     </div>
                 </div>

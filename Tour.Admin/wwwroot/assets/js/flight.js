@@ -5,20 +5,13 @@ var flight = {
     init: function () {
         $('body').on('click', '.btnDelete', flight.DeleteFunc);
         $('body').on('click', '#btnSubmit', flight.InsertFunc);
-        $('body').on('change', '#file', flight.AvatarURL);
         $('body').on('click', '#btnUpdate', flight.UpdateFunc);
     },
     UpdateFunc: function () {
         if ($('#frmUpdate').valid()) {
             var _self = $('#frmUpdate');
             var _selfForm = new FormData();
-            if (document.getElementById("file").files != null) {
-                var totalFiles = document.getElementById("file").files.length;
-                for (var i = 0; i < totalFiles; i++) {
-                    var file = document.getElementById("file").files[i];
-                    _selfForm.append("file", file);
-                }
-            }
+
             _self.serializeArray().forEach(function (field) {
                 _selfForm.append(field.name, field.value);
             })
@@ -45,25 +38,11 @@ var flight = {
             });
         }
     },
-    //Upload image
-    AvatarURL: function () {
-        if ($('#file').val().trim() === '') {
-            return;
-        }
-        var _image = $('#file').val();
-        $('#uploader').val(_image);
-    },
     InsertFunc: function () {
         if ($('#frmCreate').valid()) {
             var _self = $('#frmCreate');
             var _selfForm = new FormData();
-            if (document.getElementById("file").files != null) {
-                var totalFiles = document.getElementById("file").files.length;
-                for (var i = 0; i < totalFiles; i++) {
-                    var file = document.getElementById("file").files[i];
-                    _selfForm.append("file", file);
-                }
-            }
+
             _self.serializeArray().forEach(function (field) {
                 _selfForm.append(field.name, field.value);
             })

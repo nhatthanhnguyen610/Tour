@@ -312,7 +312,7 @@ namespace Tour.Admin.Controllers
                 }
                 if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.password))
                 {
-                    var submitResult = _sysUsrUserService.InsertSysUser(model);
+                    var submitResult = _sysUsrUserService.UpdateSysUsrUser(model);
                     return Json(new
                     {
                         IsSuccess = submitResult,

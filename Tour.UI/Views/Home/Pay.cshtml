@@ -11,7 +11,7 @@
                 <div class="row row-mt-15em">
 
                     <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
-                        <h1>Thanh Toán</h1>
+                        <h1>Đặt vé</h1>
                     </div>
 
                 </div>
@@ -26,25 +26,25 @@
         <div>
             <form>
                 <div class="form-group">
-                    <label for="flight">Flight</label>
+                    <label for="flight">Chuyến đi</label>
                     <input type="text" readonly class="form-control border-0" id="flight" value="@ViewBag.Flight.name" />
                 </div>
                 <div class="form-group">
-                    <label for="type">Type</label>
+                    <label for="type">Loại</label>
                     @Html.DropDownListFor(m => m.TTicketId, new SelectList(ViewBag.Ticket, "Id", "type"), "---Loại vé---", new { @class = "form-control", onchange = "update()" })
                 </div>
                 <div class="form-group">
-                    <label>Quantity</label>
+                    <label>Số lượng đặt</label>
                     @Html.TextBoxFor(m => m.quantity, new { @class = "form-control", Type = "number", @min = "0", onkeydown = "return false", onchange = "update()" })
                 </div>
                 <div class="form-group">
-                    <label>Price</label>
+                    <label>Giá</label>
                     @Html.TextBoxFor(m => m.price, new { @class = "form-control border-0", @readonly = "readonly" }) VNĐ
                 </div>
                 <div class="form-group pull-right">
-                    <div class="fh5co-card-item" style=" width: 91px; height: 43px;">
+                    <div class="fh5co-card-item" style=" width: 145px; height: 43px;">
                         <div class="fh5co-text">
-                            <p><a href="#"><span class="btn btn-primary">Pay</span></a></p>
+                            <p><a href="#"><span class="btn btn-primary">Thanh toán</span></a></p>
                         </div>
                     </div>
                 </div>

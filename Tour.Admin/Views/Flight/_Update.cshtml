@@ -16,26 +16,6 @@
                 @Html.ValidationSummary(true)
                 @Html.HiddenFor(m => m.Id)
                 <div class="card-body">
-                    <div class="row section">
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                <div class="fileupload fileupload-new admin-form" data-provides="fileupload">
-                                    <div class="fileupload-preview thumbnail mb5" style="height:167px">
-                                        @Html.Raw("<img style=\"height: 167px; width: 100 %; display: block; \" src=\"" + @Model.image + "\" />")
-                                    </div>
-                                    <span class="btn bg-gradient-secondary btn-file btn-block ph5">
-                                        <span class="fileupload-new">Image</span>
-                                        <span class="fileupload-exists">Image</span>
-                                        <input type="file" name="file" id="file" accept="image/*">
-                                    </span>
-                                </div>
-                            </div>
-                            @Html.ValidationMessageFor(m => m.image)
-                            <div class="col-md-1"></div>
-                        </div>
-                        <input type="hidden" class="gui-input" hidden="hidden" id="uploader" value="@Model.image" placeholder="Please Select A File">
-                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">

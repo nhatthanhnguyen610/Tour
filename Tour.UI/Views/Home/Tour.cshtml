@@ -27,8 +27,8 @@
     <div class="gtco-container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-                <h2>Trip With Your Favourite Destination</h2>
-                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                <h2>Du lịch tới những nơi bạn yêu thích</h2>
+                <p>Không cần nhiều lý do để bắt đầu 1 chuyến đi mới. Cuộc sống là một cuộc phiêu lưu đầy táo bạo hoặc không là gì cả.</p>
             </div>
         </div>
         @using (Html.BeginForm("_Index", "Home", FormMethod.Get, new { @class = "form-sm form-load-ajax", id = "frmHome", data_load_view = "divListDetail" }))
@@ -59,10 +59,10 @@
                 {
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="fh5co-card-item">
-                            <a href="@item.image" class="image-popup">
+                            <a href="~/assert/img/@item.name/@item.image" class="image-popup">
                                 <figure>
                                     <div class="overlay"><i class="ti-plus"></i></div>
-                                    <img src="@item.image" alt="Image" class="img-responsive">
+                                    <img src="~/assert/img/@item.name/@item.image" alt="Image" class="img-responsive">
                                 </figure>
 
                             </a>
@@ -71,7 +71,7 @@
                                 <p>@item.description</p>
                                 @if (Constants.FullName == null)
                                 {
-                                    <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
+                                    <p><a href="#exampleModalCenter" data-toggle="modal" data-target="#exampleModalCenter"><span class="btn btn-primary">Xem thêm</span></a></p>
                                 }
                                 else
                                 {
@@ -119,6 +119,16 @@
                         <button type="submit" class="btn btn-default btn-block">Subscribe</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Bạn phải <a href="/">đăng nhập</a> mới có thể xem thêm</p>
             </div>
         </div>
     </div>

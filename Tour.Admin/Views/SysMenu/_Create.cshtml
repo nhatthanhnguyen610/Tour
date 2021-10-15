@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Tên Menu</label>
+                                    <label>Tên Menu<span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.menuTitleCde, new { @class = "form-control", @placeholder = "Tên Menu" })
                                     @Html.ValidationMessageFor(m => m.menuTitleCde)
                                 </div>

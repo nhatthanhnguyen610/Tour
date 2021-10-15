@@ -218,7 +218,6 @@ namespace Tour.Provider
                 model.phone,
                 model.avatar,
                 model.isActive,
-                model.createdBy
             };
             var result = base.ExeScalar("sp_SysUsrUser_Update_V01", paramObj);
             if (result != null && result.ToString().Equals(ResultCode.Success))

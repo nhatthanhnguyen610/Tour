@@ -127,6 +127,7 @@ namespace Tour.Admin.Controllers
             {
                 var _lstTTicket = _TypeTicketService.GetInfo(tTicketID);
                 vm = _lstTTicket.ConvertObject<TypeTicketModel, TypeTicketViewModel>();
+                ViewBag.checkType = _lstTTicket.type;
             }
             catch (Exception ex)
             {
