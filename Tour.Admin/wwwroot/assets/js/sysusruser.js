@@ -131,6 +131,7 @@ var sysuser = {
         });
     },
     ReloadData: function () {
+        //location.reload()
         $("[name='p']").val($("#PagingIndex").val());
         $('#btnSearch').trigger('click');
     }

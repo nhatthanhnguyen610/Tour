@@ -11,8 +11,6 @@ namespace Tour.Common.Constants
         public const string TypeLanguage = "Language";
         public const string AppSettings = "AppSettings";
         public const string Logging = "Logging";
-        public const string LogLevel = "LogLevel";
-        public const string LogPath = "C:\\erp_log\\";
         public const string ContentTypeJson = "application/json";
         public const string ContentTypeFormdata = "multipart/form-data";
         public const string No_Image = "/assets/image/no_image_available.jpg";
@@ -54,17 +52,6 @@ namespace Tour.Common.Constants
         public const string MasterListCode = "masterListCode";
         public const string MasterListCdeName = "masterListCdeName";
     }
-    public static class LogConst
-    {
-        public const string TypeLogFile = ".html";
-        public const string yyyMMdd = "yyyyMMdd";
-        public const string ddMMyyyhhmmss = "dd/MM/yyyy HH:mm:ss - ";
-        public const string InPut = "INPUT";
-        public const string OutPut = "OUTPUT";
-        public const string Error = "ERROR";
-        public const string OpenP = "<p style=\"color:blue;\">";
-        public const string CloseP = "</p>";
-    }
 
     public static class ResultCode
     {
@@ -91,12 +78,7 @@ namespace Tour.Common.Constants
         public const string pathProduct = @"Image/product/";
         public const string yyyyMMddhhmmssfff = "yyyyMMddhhmmssfff";
     }
-    public static class ProductCde
-    {
-        public const string Id = "id";
-        public const string ManuFacturerName = "manufacturerName";
-        public const string GroupProductName = "groupProductName";
-    }
+
     public static class CdeSelectList
     {
         public const string Id = "id";
