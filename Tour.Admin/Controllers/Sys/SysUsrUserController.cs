@@ -115,6 +115,20 @@ namespace Tour.Admin.Controllers
             }
         }
         /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            if (!string.IsNullOrWhiteSpace(HttpContext.Session.GetString(DefinedConstants.SessionUser)))
+            {
+                HttpContext.Session.Remove(DefinedConstants.SessionUser);
+            }
+            return Redirect("/SysUsrUser/Login");
+        }
+        /// <summary>
         ///  Author: thanhnn
         ///  Description: Phân quyền
         /// </summary>
