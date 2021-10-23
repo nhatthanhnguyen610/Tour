@@ -128,10 +128,10 @@ var sysuser = {
                     toastr.error(msg.Message);
                 }
             }
-        });
+        });x
     },
     ReloadData: function () {
-        //location.reload()
+        location.reload()
         $("[name='p']").val($("#PagingIndex").val());
         $('#btnSearch').trigger('click');
     }
