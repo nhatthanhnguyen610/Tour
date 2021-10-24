@@ -216,7 +216,14 @@
 
 	};
 
-	
+	var indexToTop = function () {
+		$('#js-alert').click(function () {
+			$('#exampleModalCenter').modal('show');
+			$('html, body').animate({
+				scrollTop: $('html').offset().top
+			}, 500, 'easeInOutExpo');		
+		})
+	};
 
 	var goToTop = function() {
 
@@ -227,7 +234,8 @@
 			$('html, body').animate({
 				scrollTop: $('html').offset().top
 			}, 500, 'easeInOutExpo');
-			
+
+			$('#exampleModalCenter').modal('hide');
 			return false;
 		});
 
@@ -299,6 +307,7 @@
 		counterWayPoint();
 		dateForm();
 		parallax();
+		indexToTop();
 	});
 
 

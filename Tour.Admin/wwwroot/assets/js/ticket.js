@@ -87,6 +87,7 @@ var ticket = {
         });
     },
     ReloadData: function () {
+        location.reload()
         $("[name='p']").val($("#PagingIndex").val());
         $('#btnSearch').trigger('click');
     }

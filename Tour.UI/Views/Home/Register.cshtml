@@ -1,0 +1,81 @@
+﻿@model Tour.UI.Models.CustomerViewModel;
+@{
+    ViewData["Title"] = "Register";
+}
+
+<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url('../assert/images/img_bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-left">
+                <div class="row mt-sm">
+                    <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+                        <h1>Đăng ký khách hàng</h1>
+                    </div>
+                    <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+                        <div class="form-wrap">
+                            <div class="tab">
+                                <div class="tab-content">
+                                    <div class="tab-content-inner active" data-content="signup">
+                                        <h3>Đăng ký</h3>
+                                        @using (Html.BeginForm("_Register", "Home", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(m => m.Id)
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <label for="userName">Tên đăng nhập</label>
+                                                    @Html.TextBoxFor(m => m.username, new { @class = "form-control", @type = "email" })
+                                                    @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <label for="password">Mật khẩu</label>
+                                                    @Html.PasswordFor(m => m.password, new { @class = "form-control", @type = "password" })
+                                                    @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <label for="fullName">Họ và Tên</label>
+                                                    @Html.TextBoxFor(m => m.fullName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.fullName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-6">
+                                                    <label for="birthday">Ngày sinh</label>
+                                                    @Html.TextBoxFor(m => m.birthday, "{0:dd/MM/yyyy}", new { @class = "form-control show-datepicker", @placeholder = "Ngày sinh" })
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" style="background-color: #fff;border-radius: 0 .25rem .25rem 0;"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="phone">Số điện thoại</label>
+                                                    @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <label for="address">Địa chỉ</label>
+                                                    @Html.TextAreaFor(m => m.address, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <input type="submit" class="btn btn-primary btn-block" value="Đăng kí">
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -18,4 +18,20 @@ namespace Tour.UI.Models
 
         public string errorMessage { get; set; }
     }
+
+    public class CustomerViewModel
+    {
+        public decimal Id { get; set; }
+        [Required(ErrorMessage = "Họ và tên không được bỏ trống")]
+        public string fullName { get; set; }
+        public DateTime? birthday { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        [Required(ErrorMessage ="Tên đăng nhập không được bỏ trống")]
+        public string username { get; set; }
+        [Required(ErrorMessage = "Mật khẩu không được bỏ trống")]
+        public string password { get; set; }
+        public string address { get; set; }
+        public string avatar { get; set; }
+    }
 }

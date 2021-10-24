@@ -5,7 +5,7 @@
     ViewData["Title"] = "Home";
 }
 
-<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url('../../wwwroot/assert/images/img_bg_4.jpg');">
+<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url('../assert/images/img_bg_1.jpg');">
     <div class="overlay"></div>
     <div class="gtco-container">
         <div class="row">
@@ -49,7 +49,7 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-md-12">
-                                                        <input type="button" class="btn btn-default btn-block" value="Đăng kí">
+                                                        <input type="button" onclick="location.href = '/Home/Register';" class="btn btn-default btn-block" value="Đăng kí">
                                                     </div>
                                                 </div>
                                             }
@@ -92,7 +92,8 @@
                             <p>@item.description</p>
                             @if (Constants.FullName == null)
                             {
-                                <p><a href="#" class="js-gotop"><span class="btn btn-primary">Xem thêm</span></a></p>
+                                
+                                <p><a href="#exampleModalCenter" data-toggle="modal" data-target="#exampleModalCenter"><span class="btn btn-primary">Xem thêm</span></a></p>
                             }
                             else
                             {
@@ -226,6 +227,16 @@
                         <button type="submit" class="btn btn-default btn-block">Nhận thông báo</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Bạn phải <a href="#" class="js-gotop">đăng nhập</a> mới có thể xem thêm</p>
             </div>
         </div>
     </div>

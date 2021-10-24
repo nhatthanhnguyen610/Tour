@@ -87,6 +87,7 @@ var typeticket = {
         });
     },
     ReloadData: function () {
+        location.reload()
         $("[name='p']").val($("#PagingIndex").val());
         $('#btnSearch').trigger('click');
     }
