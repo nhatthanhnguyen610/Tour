@@ -125,7 +125,7 @@ namespace UI.Controllers
             {
                 throw ex;
             }
-            return View("Tour",vm);
+            return View("Tour", vm);
         }
 
         [AllowAnonymous]
@@ -172,7 +172,7 @@ namespace UI.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Pay(TicketViewModel vm) 
+        public ActionResult _Pay(TicketViewModel vm)
         {
             var model = vm.ConvertObject<TicketViewModel, TicketModel>();
             model.userId = int.Parse(Constants.UserCde);
@@ -221,7 +221,7 @@ namespace UI.Controllers
                     if (!string.IsNullOrWhiteSpace(model.fullName) && !string.IsNullOrWhiteSpace(model.password) && !string.IsNullOrWhiteSpace(model.username))
                     {
                         var submitResult = _sysCustomerService.InsertSysCustomer(model);
-                        if(submitResult)
+                        if (submitResult)
                         {
                             return RedirectToAction("Index");
                         }
@@ -234,6 +234,21 @@ namespace UI.Controllers
             }
 
             return View("Register", vm);
+        }
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            if (!string.IsNullOrWhiteSpace(HttpContext.Session.GetString(DefinedConstants.SessionUser)))
+            {
+                HttpContext.Session.Remove(DefinedConstants.SessionUser);
+                Constants.FullName = null;
+            }
+            return Redirect("/Home/Index");
         }
     }
 }
