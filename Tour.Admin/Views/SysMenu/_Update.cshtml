@@ -35,13 +35,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Menu icon<span style="color:red">*</span></label>
+                                    <label>Menu icon</label>
                                     @Html.TextBoxFor(m => m.menuIcon, new { @class = "form-control", @placeholder = "Menu Icon" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Tên Menu</label>
+                                    <label>Tên Menu<span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.menuTitleCde, new { @class = "form-control", @placeholder = "Tên Menu" })
                                     @Html.ValidationMessageFor(m => m.menuTitleCde)
                                 </div>
@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Controller<span style="color:red">*</span></label>
+                                    <label>Controller</label>
                                     @Html.TextBoxFor(m => m.controller, new { @class = "form-control", @placeholder = "Controller" })
                                 </div>
                             </div>

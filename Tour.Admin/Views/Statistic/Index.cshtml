@@ -1,0 +1,43 @@
+﻿@model Tour.Admin.Models.StatisticVM;
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+@using (Html.BeginForm("_Index", "Statistic", FormMethod.Post, new { @class = "p-2"}))
+{
+
+		<div class="form-row float-right">
+			<div class="form-group col-md-5">
+				Tìm kiếm doanh thu theo năm: 
+			</div>
+			<div class="form-group col-md-3">
+				@Html.TextBoxFor(x => x.year, new { @class = "form-control", @placeholder = "Năm", Type = "number", @min = "0" })
+			</div>
+			<div class="form-group col-md-3">
+				<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+			</div>
+		</div>
+	
+}
+
+<div id="chartContainer" style="height: 370px; width: 100%; margin-top:5%;"></div>
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "dark1", "dark2"
+	exportEnabled: true,
+	title: {
+		text: "Doanh thu theo từng tháng (VNĐ)"
+	},
+	data: [{
+		type: "column",
+		dataPoints:  @Html.Raw(ViewBag.data)
+	}]
+});
+chart.render();
+
+}
+</script>
