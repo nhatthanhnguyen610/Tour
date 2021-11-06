@@ -61,7 +61,8 @@ namespace Tour.Admin.Controllers
 
                 if (vm == null)
                 {
-                    ViewBag.data = null;
+                    model.Add(new StatisticViewModel(0, "Không có dữ liệu"));
+                    ViewBag.data = JsonConvert.SerializeObject(model);
                     return View("Index", search);
                 }
 
