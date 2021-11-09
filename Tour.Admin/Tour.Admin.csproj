@@ -9,17 +9,20 @@
  <ItemGroup>
     <Compile Remove="Models\NewFolder\**" />
     <Compile Remove="se\**" />
+    <Compile Remove="wwwroot\assets\css\**" />
     <Content Remove="Models\NewFolder\**" />
     <Content Remove="se\**" />
+    <Content Remove="wwwroot\assets\css\**" />
     <EmbeddedResource Remove="Models\NewFolder\**" />
     <EmbeddedResource Remove="se\**" />
+    <EmbeddedResource Remove="wwwroot\assets\css\**" />
     <None Remove="Models\NewFolder\**" />
     <None Remove="se\**" />
+    <None Remove="wwwroot\assets\css\**" />
   </ItemGroup>
 	
  <ItemGroup>
    <Content Remove="Views\SysMenu\_MenuCreate.cshtml" />
-   <Content Remove="wwwroot\assets\css\rate.css" />
  </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\css\" />
     <Folder Include="wwwroot\assets\image\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
